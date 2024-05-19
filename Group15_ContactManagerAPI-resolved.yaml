@@ -1,0 +1,220 @@
+---
+swagger: "2.0"
+info:
+  description: This is the API documentaion for the COP4331 Contact Manager Small Project
+  version: "1.0"
+  title: Contact Manager
+  contact:
+    email: shanewelz@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: cop4331summer-test.online
+basePath: /LAMPAPI
+schemes:
+- http
+paths:
+  /Login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to contact manager app
+      description: Logs in to contact manager app
+      operationId: doLogin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: Login
+        required: false
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /SearchContacts.php:
+    post:
+      tags:
+      - Contacts
+      summary: Searches user's contact table for desired contact
+      description: Searches user's contact table for desired contact
+      operationId: doSearchContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: searchItem
+        description: Search
+        required: false
+        schema:
+          $ref: '#/definitions/Search'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /AddContact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Adds the specified contact to the user's contact manager
+      description: Adds the specified contact to the user's contact manager
+      operationId: doAddContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: additem
+        description: Add
+        required: false
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /DeleteContact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Deletess the specified contact from the user's contact manager
+      description: Adds the specified contact from the user's contact manager
+      operationId: doDeleteContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: deleteitem
+        description: Delete
+        required: false
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+  /EditContact.php:
+    post:
+      tags:
+      - Edit
+      summary: Changes the Values of the given contact to the specified values
+      description: Changes the Values of the given contact to the specified values
+      operationId: doEditContact
+      consumes:
+      - application/jason
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: editItem
+        description: Edit
+        required: false
+        schema:
+          $ref: '#/definitions/Edit'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
+definitions:
+  Login:
+    type: object
+    required:
+    - Login
+    - Password
+    properties:
+      Login:
+        type: string
+        example: fred
+      Password:
+        type: string
+        example: secret
+  Contact:
+    type: object
+    required:
+    - Email
+    - FirstName
+    - LastName
+    - Phone
+    - UserID
+    properties:
+      FirstName:
+        type: string
+        example: John
+      LastName:
+        type: string
+        example: Smith
+      Phone:
+        type: string
+        example: (555)555-5555
+      Email:
+        type: string
+        example: JohnSmith@hotmail.com
+      UserID:
+        type: integer
+        example: 1
+  Search:
+    type: object
+    required:
+    - Search
+    - UserID
+    properties:
+      Search:
+        type: string
+        example: J
+      UserID:
+        type: integer
+        example: 1
+  Edit:
+    type: object
+    required:
+    - EmailNew
+    - EmailOld
+    - FirstNameNew
+    - FirstNameOld
+    - LastNameNew
+    - LastNameOld
+    - PhoneNew
+    - PhoneOld
+    - UserID
+    properties:
+      FirstNameOld:
+        type: string
+        example: John
+      LastNameOld:
+        type: string
+        example: Smith
+      PhoneOld:
+        type: string
+        example: (555)555-5555
+      EmailOld:
+        type: string
+        example: JohnSmith@hotmail.com
+      FirstNameNew:
+        type: string
+        example: Jon
+      LastNameNew:
+        type: string
+        example: Smith
+      PhoneNew:
+        type: string
+        example: (555)123-4567
+      EmailNew:
+        type: string
+        example: JohnSmith@outlook.com
+      UserID:
+        type: integer
+        example: 1
