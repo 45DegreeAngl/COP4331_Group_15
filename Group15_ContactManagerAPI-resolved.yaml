@@ -37,12 +37,35 @@ paths:
           description: OK
         "404":
           description: URL Not Found
+  /SignUp.php:
+    post:
+      tags:
+      - Users
+      summary: Adds the specified user to to the Users table
+      description: Adds the specified user to to the Users table
+      operationId: doSignUp
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: signUpItem
+        description: SignUp
+        required: false
+        schema:
+          $ref: '#/definitions/SignUp'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
   /SearchContacts.php:
     post:
       tags:
-      - Contacts
-      summary: Searches user's contact table for desired contact
-      description: Searches user's contact table for desired contact
+      - Search
+      summary: Searches user's contact table for desired contact(s)
+      description: Searches user's contact table for desired contact(s)
       operationId: doSearchContact
       consumes:
       - application/json
@@ -63,7 +86,7 @@ paths:
   /AddContact.php:
     post:
       tags:
-      - Contacts
+      - Add
       summary: Adds the specified contact to the user's contact manager
       description: Adds the specified contact to the user's contact manager
       operationId: doAddContact
@@ -86,7 +109,7 @@ paths:
   /DeleteContact.php:
     post:
       tags:
-      - Contacts
+      - Delete
       summary: Deletess the specified contact from the user's contact manager
       description: Adds the specified contact from the user's contact manager
       operationId: doDeleteContact
@@ -132,16 +155,33 @@ paths:
 definitions:
   Login:
     type: object
+    properties:
+      login:
+        type: string
+        example: fred
+      password:
+        type: string
+        example: secret
+  SignUp:
+    type: object
     required:
+    - FirstName
+    - LastName
     - Login
     - Password
     properties:
+      FirstName:
+        type: string
+        example: John
+      LastName:
+        type: string
+        example: Smith
       Login:
         type: string
-        example: fred
+        example: JohnnyS
       Password:
         type: string
-        example: secret
+        example: password
   Contact:
     type: object
     required:
