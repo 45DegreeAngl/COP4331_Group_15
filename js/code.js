@@ -65,6 +65,12 @@ function doSignUp() {
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 
+	document.getElementById("signinErrorMessage").innerHTML = "";
+
+	if( !firstName || !lastName || !loginName || !password) {
+		document.getElementById("signinErrorMessage").innerHTML = "Please fill out all fields.";
+		return;
+	}
 
 	let user = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
 
@@ -81,10 +87,12 @@ function doSignUp() {
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("signinResult").innerHTML = "User has been added";
+				document.getElementById("signinResult").innerHTML = "User has been added!";
 			}
 		};
 		xhr.send(jsonPayload);
+
+		
 	}
 	catch(err)
 	{
@@ -93,7 +101,59 @@ function doSignUp() {
 
 }
 
+function doLogin(login, password)
+{
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	
+//	var hash = md5( password );
+	
+	// document.getElementById("loginResult").innerHTML = "";
 
+	let tmp = {Login:login,Password:password};
+//	var tmp = {login:login,password:hash};
+	let jsonPayload = JSON.stringify( tmp );
+	
+	let url = urlBase + '/Login.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( this.responseText );
+				console.log(jsonObject);
+				userId = jsonObject.id;
+		
+				firstName = jsonObject.firstName;
+				lastName = jsonObject.lastName;
+
+				console.log("Login successful!");
+				console.log("Name:", firstName, lastName); 
+
+				saveCookie();
+
+				window.location.href = "contactManager.html";
+
+				
+				
+	
+			}
+
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
 
 
 
@@ -136,7 +196,7 @@ function readCookie()
 	}
 	else
 	{
-//		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("welcomeMessage").innerHTML = "Welcome back, " + firstName + " " + lastName + "!";
 	}
 }
 
