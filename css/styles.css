@@ -1,0 +1,341 @@
+body 
+{
+    background-image: url("../images/Paradise.jpg"); 
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+#title {
+    margin-top: -50px;
+    margin-bottom: 0; 
+    font-size: 80px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    color: #FFFFFF;
+}
+
+h3 {
+    margin-top: -18; 
+}
+
+h3 a {
+    font-family: 'Kalam', cursive;
+    font-size: 30px;
+    color: #95608A;
+    text-decoration: none;
+    display: block;  
+}
+
+.button
+{
+    background-color: transparent;
+    font-size: 50px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Kalam', cursive;
+}
+
+.button:hover{
+    background-color: #009dc4;
+    color: #FFFFFF;
+    opacity: 50%;
+}
+
+.signup-button {
+    font-family: 'Kalam', cursive;
+    position: absolute; 
+    bottom: 1px; 
+    right: 10px; 
+    padding: 10px 20px;
+    background-color: transparent; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    color: hsl(197, 80%, 18%); 
+}
+
+
+/*
+#title 
+{
+    margin-top: 200px;
+    font-size: 50px;
+    width: 100%;
+    /*margin: 1% 5%; 
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    color: #FFFFFF;
+}
+
+h3 a {
+    font-family: "Kalam", cursive;
+    margin-bottom: -200px !important; 
+    color: #95608A;
+    text-decoration: none;
+}
+*/
+
+.kalam-light {
+    font-family: "Kalam", cursive;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+#loginDiv
+{
+    position: relative;
+    font-size: 25px;
+    width: 60%;
+    max-width: 300px;
+        /*margin-left: 15%;*/
+    padding: 25px;
+    background-color: hsla(199, 70%, 46%, 0.5);
+    border-radius: 10px;
+    /*
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 100px; 
+    */
+}
+
+#signupForm {
+    font-family: "Kalam", cursive;
+    color:#FFFFFF;
+    position: relative;
+    font-size: 20px;
+    width: auto;
+    max-width: 350px;
+        /*margin-left: 15%;*/
+    padding: 15px;
+    background-color: hsla(199, 70%, 46%, 0.7);
+    border-radius: 0px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 100px; 
+    */ 
+}
+
+#titleOfLogin{
+    display: inline-block;
+    font-size: 1em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Kalam', cursive;
+    color: #FFFFFF;
+}
+
+#titleOfSignin{
+    display: inline-block;
+    font-size: 1em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-family: 'Kalam', cursive;
+    color: #FFFFFF;
+}
+
+
+input[type="text"], input[type="password"], .buttons {
+    width: 80%; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+}
+
+#loggedInDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+
+#accessUIDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+
+.buttons
+{
+    font-size: 30px;
+    border-radius: 25px;
+    width: 50%;
+    margin-left: 25%;
+    font-family: 'Kalam', cursive;
+}
+
+.buttons:hover{
+    background-color: #9109914f;
+    color: #FFFFFF;
+    opacity: 50%;
+}
+
+#loginName
+{
+	font-size: 30px;
+}
+#loginPassword
+{
+	font-size: 30px;
+}
+#searchText
+{
+	font-size: 30px;
+}
+#colorText
+{
+	font-size: 30px;
+}
+
+input[type="text"],input[type="password"]{
+    border-radius: 25px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 2%;
+    font-family: 'Kalam', cursive;
+}
+
+
+
+#loginResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Kalam', cursive;
+    color: #95060a;
+}
+
+#userName{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+#logoutButton{
+    width: 20%;
+    margin-left: 40%;
+}
+
+select{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: 'Kalam', cursive;
+}
+
+#colorSearchResult{
+    display: none;
+}
+
+#colorAddResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Kalam', cursive;
+    color: #95060a;
+}
+
+#signinResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Kalam', cursive;
+    color: hsl(246, 73%, 47%);
+}
+
+#signinButton{
+    font-family: 'Kalam', cursive;
+    position: absolute; 
+    bottom: 1px; 
+    right: 10px; 
+    padding: 10px 20px;
+    background-color: transparent; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer;
+}
+
+#signinButton:hover {
+    color: hsl(197, 80%, 18%); 
+}
+
+#firstname{
+    font-family: 'Kalam', cursive;
+    font-size: 25px;
+    color: black 
+}
+
+#lastname{
+    font-family: 'Kalam', cursive;
+    font-size: 25px;
+    color: black  
+}
+
+#loginName{
+    font-family: 'Kalam', cursive;
+    font-size: 25px;
+    color: black 
+}
+
+#loginPassword{
+    font-family: 'Kalam', cursive;
+    font-size: 25px;
+    color: black 
+}
