@@ -60,6 +60,29 @@ paths:
           description: OK
         "404":
           description: URL Not Found
+  /ValidateSignUp.php:
+    post:
+      tags:
+      - Users
+      summary: Checks if Login is already taken
+      description: Checks if Login is already taken
+      operationId: doValidateSignUp
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: validationItem
+        description: Validate
+        required: false
+        schema:
+          $ref: '#/definitions/ValidateSignUp'
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: URL Not Found
   /SearchContacts.php:
     post:
       tags:
@@ -182,6 +205,14 @@ definitions:
       Password:
         type: string
         example: password
+  ValidateSignUp:
+    type: object
+    required:
+    - Login
+    properties:
+      Login:
+        type: string
+        example: JohnnyS
   Contact:
     type: object
     required:
