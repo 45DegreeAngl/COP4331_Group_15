@@ -1,306 +1,122 @@
 body 
 {
-    background-image: url("../images/Paradise.jpg"); 
+    background-image: url("../images/COP4331_Homepage_Background.png"); 
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     margin: 0;
-    height: 100%;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-}
-
-
-#title {
-    margin-top: -50px;
-    margin-bottom: 0; 
-    font-size: 80px;
-    width: 100%;
-    text-align: center;
-    font-family: 'Kalam', cursive;
-    color: #FFFFFF;
-}
-
-#contactManagertTitle{
-    margin-top: -50px;
-    margin-bottom: 0; 
-    font-size: 80px;
-    width: 100%;
-    text-align: center;
-    font-family: 'Kalam', cursive;
-    color: #06005e;
-}
-
-h3 {
-    margin-top: -18; 
-}
-
-h3 a {
-    font-family: 'Kalam', cursive;
-    font-size: 30px;
-    color: #95608A;
-    text-decoration: none;
-    display: block;  
-}
-
-.button
-{
-    background-color: transparent;
-    font-size: 50px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: 'Kalam', cursive;
-}
-
-.button:hover{
-    background-color: #009dc4;
-    color: #FFFFFF;
-    opacity: 50%;
-}
-
-.signup-button {
-    font-family: 'Kalam', cursive;
-    position: absolute; 
-    bottom: 10px; 
-    right: 10px; 
-    padding: 10px 20px;
-    background-color: transparent; 
-    color: white; 
-    text-decoration: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer;
-}
-
-.signup-button:hover {
-    color: hsl(197, 80%, 18%); 
-    background-color: white;
-}
-
-
-/*
-#title 
-{
-    margin-top: 200px;
-    font-size: 50px;
-    width: 100%;
-    /*margin: 1% 5%; 
-    text-align: center;
-    font-family: 'Kalam', cursive;
-    color: #FFFFFF;
-}
-
-h3 a {
-    font-family: "Kalam", cursive;
-    margin-bottom: -200px !important; 
-    color: #95608A;
-    text-decoration: none;
-}
-*/
-
-.kalam-light {
-    font-family: "Kalam", cursive;
-    font-weight: 300;
-    font-style: normal;
-  }
-
-#loginDiv
-{
+    justify-content: center;
+    align-items: center;
     position: relative;
-    font-size: 25px;
-    width: 60%;
-    max-width: 300px;
-        /*margin-left: 15%;*/
-    padding: 25px;
-    background-color: hsla(199, 70%, 46%, 0.5);
+    overflow: hidden;
+}
+
+/* ------------------------------------------------------------------------------------------------------- */
+/*  signup.html's styling:  */
+/* ------------------------------------------------------------------------------------------------------- */
+
+.signup-container {
+    font-size: 1.1rem;
+    font-family: 'Kalam', cursive;
+    color: white;
+    position: fixed;
+    top: 80px;
+    max-width: 500px;
+    width: 100%;
     border-radius: 10px;
-    /*
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 100px; 
-    */
+   
 }
 
-#signupForm {
-    font-family: "Kalam", cursive;
-    color:#FFFFFF;
+.signup-container header{
+    font-family: 'Kalam', cursive;
+    font-size: 2.0rem;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: -50px;
+    background-color: #011529;
+    border-radius: 10px;
+
+}
+
+.signup-container .signup-form{
+    font-family: 'Kalam', cursive;
+    padding-top: 50px;
+    color: white;
+    margin-top: 0px;
+    background-color: #011529;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.signup-container .signup-input-box{
+    font-family: 'Kalam', cursive;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.signup-form .signup-input-box input{
+    font-family: 'Kalam', cursive;
     position: relative;
-    font-size: 20px;
-    width: auto;
-    max-width: 350px;
-        /*margin-left: 15%;*/
-    padding: 15px;
-    padding-bottom: 70px;
-    background-color: hsla(199, 70%, 46%, 0.7);
-    border-radius: 0px;
-    margin: auto;
+    height: 35px;
+    width: 100%;
+    outline: none;
+    font-size: 1.1rem;
+    font-size: 25px;
+    margin-top: 5px;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+
+.signup-container .signup-button-container {
+    font-family: 'Kalam', cursive;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /*
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 100px; 
-    */ 
+    justify-content: space-between;
+    width: 100%; 
+    margin-top: 50px;
 }
 
-#titleOfLogin{
-    display: inline-block;
-    font-size: 1em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
+.signup-container .signup-button-left,
+.signup-container .signup-button-right {
     font-family: 'Kalam', cursive;
-    color: #FFFFFF;
+    flex: 1;    
+    padding: 0 50px;
 }
 
-#titleOfSignin{
-    display: inline-block;
-    font-size: 1em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 32px;
+.signup-container .signup-button-left button,
+.signup-container .signup-button-right button {
+    font-size: 17px;
     font-family: 'Kalam', cursive;
-    color: #FFFFFF;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    
+    margin-bottom: 20px;
+}
+
+.signup-container .signup-button-left button:hover,
+.signup-container .signup-button-right button:hover {
+    font-family: 'Kalam', cursive;
+    background-color: #10467A;
 }
 
 
-input[type="text"], input[type="password"], .buttons {
-    width: 80%; 
-    margin-left: auto; 
-    margin-right: auto; 
+
+#signinResultMessage{
     display: block;
-}
-
-#loggedInDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-#accessUIDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
-}
-
-.buttons
-{
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
-    font-family: 'Kalam', cursive;
-}
-
-.buttons:hover{
-    background-color: #9109914f;
-    color: #FFFFFF;
-    opacity: 50%;
-}
-
-#loginName
-{
-	font-size: 30px;
-}
-#loginPassword
-{
-	font-size: 30px;
-}
-#searchText
-{
-	font-size: 30px;
-}
-#colorText
-{
-	font-size: 30px;
-}
-
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Kalam', cursive;
-}
-
-
-
-#loginResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Kalam', cursive;
-    color: #95060a;
-}
-
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
-}
-
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
-}
-
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Kalam', cursive;
-}
-
-#colorSearchResult{
-    display: none;
-}
-
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Kalam', cursive;
-    color: #95060a;
-}
-
-#signinResult{
-    display: block;
-    font-size: 0.8em;
+    font-size: 1.1em;
     width: 100%;
     text-align: center;
     margin-top: 5px;
@@ -309,57 +125,201 @@ select{
     color: white;
 }
 
-#signinErrorMessage{
-    display: block;
-    font-size: 0.8em;
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------- */
+/*  signup-login.html's styling:  */
+/* ------------------------------------------------------------------------------------------------------- */
+
+.login-container {
+    font-size: 1.1rem;
+    font-family: 'Kalam', cursive;
+    color: white;
+    position: fixed;
+    top: 80px;
+    max-width: 500px;
     width: 100%;
+    border-radius: 10px;
+}
+
+.login-container header {
+    font-family: 'Kalam', cursive;
+    font-size: 2.0rem;
+    color: white;
+    font-weight: 500;
     text-align: center;
+    padding: 40px 20px;
+    margin-bottom: -50px;
+    background-color: #011529;
+    border-radius: 10px;
+}
+
+.login-container .login-form {
+    font-family: 'Kalam', cursive;
+    padding-top: 50px;
+    color: white;
+    margin-top: 0px;
+    background-color: #011529;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-container .login-input-box {
+    font-family: 'Kalam', cursive;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.login-form .login-input-box input {
+    font-family: 'Kalam', cursive;
+    position: relative;
+    height: 35px;
+    width: 100%;
+    outline: none;
+    font-size: 1.1rem;
+    font-size: 25px;
     margin-top: 5px;
-    margin-bottom: 5px;
-    font-family: 'Kalam', cursive;
-    color: red;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    padding: 0 10px;
 }
 
-#signinButton{
+.login-container .login-button-container {
     font-family: 'Kalam', cursive;
-    position: absolute; 
-    right: 10px;
-    bottom: 10px;  
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.login-container .login-button-left,
+.login-container .login-button-right {
+    font-family: 'Kalam', cursive;
+    flex: 1;
+    padding: 0 50px;
+}
+
+.login-container .login-button-left button,
+.login-container .login-button-right button {
+    font-size: 17px;
+    font-family: 'Kalam', cursive;
     padding: 10px 20px;
-    background-color: transparent; 
-    color: white; 
-    text-decoration: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    display: inline-block;
-    width: auto;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
 }
 
-#signinButton:hover {
-    color: hsl(197, 80%, 18%); 
-}
-
-#firstname{
+.login-container .login-button-left button:hover,
+.login-container .login-button-right button:hover {
     font-family: 'Kalam', cursive;
-    font-size: 25px;
-    color: black 
+    background-color: #10467A;
 }
 
-#lastname{
-    font-family: 'Kalam', cursive;
-    font-size: 25px;
-    color: black  
+#loginResult {
+    font-size: 1.1em;
+    width: 90%;
+    text-align: center;
+    margin: 10px auto;
+    color: white;
 }
 
-#loginName{
-    font-family: 'Kalam', cursive;
-    font-size: 25px;
-    color: black 
+.login-button-center {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    
 }
 
-#loginPassword{
+.login-button-center button {
+    font-size: 17px;
     font-family: 'Kalam', cursive;
-    font-size: 25px;
-    color: black 
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
+
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------- */
+/*  index.html's styling:  */
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+
+
+#title {
+    font-size: 3rem;
+    width: 40%;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    color: #FFFFFF;
+    background-color: #10477a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+.signup-login-button {
+    font-family: 'Kalam', cursive;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.signup-login-button button {
+    font-family: 'Kalam', cursive;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #10477a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.signup-login-button button:hover {
+    background-color: #10477aaf;
+    color: black;
+}
+
+
+
+.kalam-light {
+    font-family: "Kalam", cursive;
+    font-weight: 300;
+    font-style: normal;
+  }
