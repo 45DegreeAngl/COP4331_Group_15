@@ -2,27 +2,37 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+    <script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kalam:wght@300;400;700&display=swap;" rel="stylesheet">
 </head>
+
 <body>
-
-<div id="loginDiv">
-	<span id="titleOfLogin">Welcome Back!</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
-	<span id="loginResult"></span>
-
-    <a href="signup.html" class="signup-button"> Sign Up</a>
-
-</div>
-
-
-
-
+    <section class="login-container">
+        <header>Welcome Back!</header>
+        <form action="#" class="login-form">
+            <div class="login-input-box">
+                <label>User Name:</label>
+                <input type="text" id="loginUsername" placeholder="Enter user name"/>
+            </div>
+            <div class="login-input-box">
+                <label>Password:</label>
+                <input type="password" id="loginPassword" placeholder="Enter password"/>
+            </div>
+            <div class="login-button-center">
+                <button type="button" id="loginButton" onclick="doLogin();">Login</button>
+            </div>
+            <div class="login-button-container">
+                <div class="login-button-left">
+                    <button type="button" id="loginBackButton" onclick="goToIndex();">Back</button>
+                </div>
+                <div class="login-button-right">
+                    <button type="button" id="signup-login-Button" onclick="goToSignup();">Sign Up</button>
+                </div>
+            </div>
+            <div id="loginResult" style="color: white;"></div>
+        </form>
+    </section>
 </body>
 </html>
