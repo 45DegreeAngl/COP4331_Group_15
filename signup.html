@@ -8,24 +8,45 @@
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Kalam:wght@300;400;700&display=swap;" rel="stylesheet">
 </head>
+
 <body>
+    <section class="signup-container">
+        <header>Welcome!</header>
+        <form action="#" class="signup-form">
+            <div class="signup-input-box">
+                <label>First Name:</label>
+                <input type="text" id="signupFirstName" placeholder="Enter first name" required/>
+            </div>
 
-<form id="signupForm">
-	<span id="titleOfSignin">Welcome!</span>
-    First Name: <input type="text" id="firstName" required><br>
-    Last Name: <input type="text" id="lastName" required><br>
-    Username: <input type="text" id="loginName" required><br>
-    Password: <input type="password" id="loginPassword" required><br>
-
-    <button id="signinButton" type="button" onclick="doSignUp();">Sign Up</button>
-    <span id="signinResult"></span>
-    <span id="signinErrorMessage"></span>
-
-
-</form>
+            <div class="signup-input-box">
+                <label>Last Name:</label>
+                <input type="text" id="signupLastName" placeholder="Enter last name" required/>
+            </div>
 
 
+            <div class="signup-input-box">
+                <label>User Name:</label>
+                <input type="text" id="signupUsername" placeholder="Enter user name" required/>
+            </div>
 
+            <div class="signup-input-box">
+                <label>Password:</label>
+                <input type="password" id="signupPassword" placeholder="Enter password" required/>
+            </div>
+
+            <div class="signup-button-container">
+                <div class="signup-button-left">
+                    <button type="button" id="backButton" onclick="goBack();">Back</button>
+                </div>
+                <div class="signup-button-right">
+                    <button type="submit" id="signupButton" onclick="doSignUp(event);">Sign Up</button>
+                </div>
+            </div>
+
+            <div id="signinResultMessage" style="color: white;"></div>
+
+        </form>
+    </section>
 
 </body>
 </html>
