@@ -1,4 +1,4 @@
-const urlBase = 'http://cop4331-kr.xyz/LAMPAPI';
+const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -11,11 +11,18 @@ function doLogin()
 	firstName = "";
 	lastName = "";
 	
-	let login = document.getElementById("loginName").value;
+	let login = document.getElementById("loginUsername").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
+
+	//	var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
+
+	if(!login || !password) {
+		document.getElementById("loginResult").innerHTML = "Please fill out all fields.";
+		return;
+	}
+
 
 	let tmp = {login:login,password:password};
 //	var tmp = {login:login,password:hash};
@@ -46,7 +53,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contactManager.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -58,103 +65,99 @@ function doLogin()
 
 }
 
-function doSignUp() {
+function goBack(){
+	window.location.href = "signup-login.html";
+}
 
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
+function goToSignup(){
+	window.location.href = "signup.html";
+}
 
-	document.getElementById("signinErrorMessage").innerHTML = "";
+function goToIndex(){
+	window.location.href = "index.html";
+}
 
-	if( !firstName || !lastName || !loginName || !password) {
-		document.getElementById("signinErrorMessage").innerHTML = "Please fill out all fields.";
+
+function doSignUp(event) {
+
+	event.preventDefault();
+
+	let firstName = document.getElementById("signupFirstName").value;
+	let lastName = document.getElementById("signupLastName").value;
+	let login = document.getElementById("signupUsername").value;
+	let password = document.getElementById("signupPassword").value;
+
+	document.getElementById("signinResultMessage").innerHTML = "";
+
+	if( !firstName || !lastName || !login || !password) {
+		document.getElementById("signinResultMessage").innerHTML = "Please fill out all fields.";
 		return;
 	}
 
-	let user = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+	/* Validation */
+	let userValidation = {Login: login};
+	let validationjsonPayload = JSON.stringify( userValidation );
+	let validationUrl = urlBase + '/ValidateSignUp.' + extension;
 
-	let jsonPayload = JSON.stringify( user );
-	let url = urlBase + '/SignUp.' + extension;
+	let validationXhr = new XMLHttpRequest();
+	validationXhr.open("POST", validationUrl, true);
+	validationXhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
 	try
 	{
-		xhr.onreadystatechange = function() 
+		validationXhr.onreadystatechange = function() 
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("signinResult").innerHTML = "User has been added!";
+				validationJsonObject = JSON.parse(this.responseText);
+
+				if (validationJsonObject.error && validationJsonObject.error.length > 0) {
+					document.getElementById("signinResultMessage").innerHTML = validationJsonObject.error;
+				} else {
+					
+					/* Username is unqiue & no errors found. Continue with sign up. */
+
+					let newUser = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+					let jsonPayload = JSON.stringify( newUser );
+
+					let url = urlBase + '/SignUp.' + extension;
+					
+					let xhr = new XMLHttpRequest();
+					xhr.open("POST", url, true);
+					xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+					try
+					{
+						xhr.onreadystatechange = function() 
+						{
+							if (this.readyState == 4 && this.status == 200) 
+							{
+								firstName.value = '';
+								lastName.value = '';
+								login.value = '';
+								password.value = '';
+								document.getElementById("signinResultMessage").innerHTML = "User successfully signed up!\nPlease press 'Back' and login.";
+							}
+						};
+						xhr.send(jsonPayload);
+					}
+					catch(err)
+					{
+						document.getElementById("signinResultMessage").innerHTML = err.message;
+					}
+				}
 			}
 		};
-		xhr.send(jsonPayload);
-
-		
+		validationXhr.send(validationjsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("signinResult").innerHTML = err.message;
+		document.getElementById("signinResultMessage").innerHTML = err.message;
 	}
+
+	
 
 }
-
-function doLogin(login, password)
-{
-	userId = 0;
-	firstName = "";
-	lastName = "";
-	
-//	var hash = md5( password );
-	
-	// document.getElementById("loginResult").innerHTML = "";
-
-	let tmp = {Login:login,Password:password};
-//	var tmp = {login:login,password:hash};
-	let jsonPayload = JSON.stringify( tmp );
-	
-	let url = urlBase + '/Login.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				let jsonObject = JSON.parse( this.responseText );
-				console.log(jsonObject);
-				userId = jsonObject.id;
-		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
-
-				console.log("Login successful!");
-				console.log("Name:", firstName, lastName); 
-
-				saveCookie();
-
-				window.location.href = "contactManager.html";
-
-				
-				
-	
-			}
-
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("loginResult").innerHTML = err.message;
-	}
-
-}
-
 
 
 
