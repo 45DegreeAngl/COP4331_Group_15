@@ -96,7 +96,7 @@ body
     font-family: 'Kalam', cursive;
     padding: 10px 20px;
     color: white;
-    background-color: #007BFF;
+    background-color: #10467A;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -109,7 +109,8 @@ body
 .signup-container .signup-button-left button:hover,
 .signup-container .signup-button-right button:hover {
     font-family: 'Kalam', cursive;
-    background-color: #10467A;
+    background-color: #10467Aaf;
+    color: black;
 }
 
 
@@ -212,7 +213,7 @@ body
     font-family: 'Kalam', cursive;
     padding: 10px 20px;
     color: white;
-    background-color: #007BFF;
+    background-color: #10467A;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -222,9 +223,11 @@ body
 }
 
 .login-container .login-button-left button:hover,
-.login-container .login-button-right button:hover {
+.login-container .login-button-right button:hover,
+.login-container .login-button-center button:hover {
     font-family: 'Kalam', cursive;
-    background-color: #10467A;
+    background-color: #10467Aaf;
+    color: black;
 }
 
 #loginResult {
@@ -243,12 +246,12 @@ body
     
 }
 
-.login-button-center button {
+.login-container .login-button-center button {
     font-size: 17px;
     font-family: 'Kalam', cursive;
     padding: 10px 20px;
     color: white;
-    background-color: #007BFF;
+    background-color: #10467A;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -275,24 +278,24 @@ body
 
 #title {
     font-size: 3rem;
-    width: 40%;
+    width: 500px;
     text-align: center;
     font-family: 'Kalam', cursive;
     color: #FFFFFF;
-    background-color: #10477a;
-    padding: 20px;
+    background-color: #10467A;
+    padding: 5px;
     border-radius: 10px;
     text-align: center;
     justify-content: center;
+    position: absolute;
+    top: 380px;
 }
-
 
 .signup-login-button {
     font-family: 'Kalam', cursive;
     border: none;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 515px;
 }
 
 .signup-login-button button {
@@ -304,22 +307,38 @@ body
     align-items: center;
     justify-content: center;
     color: white;
-    background-color: #10477a;
+    background-color: #10467a;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-
 }
 
 .signup-login-button button:hover {
-    background-color: #10477aaf;
+    background-color: #10467aaf;
     color: black;
 }
-
-
 
 .kalam-light {
     font-family: "Kalam", cursive;
     font-weight: 300;
     font-style: normal;
   }
+
+/* ------------------------------------------------------------------------------------------------------- */
+/* Contact Manager Page's styling */
+/* ------------------------------------------------------------------------------------------------------- */
+
+.contact-manager-background {
+    background-image: url("../images/Blurry_COP4331_Homepage_Background_Blurred_Version.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
