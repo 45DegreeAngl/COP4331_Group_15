@@ -87,7 +87,7 @@ paths:
     post:
       tags:
       - Search
-      summary: Searches user's contact table for desired contact(s)
+      summary: Searches user's contact table for desired contact(s). Searches all columns in contact table
       description: Searches user's contact table for desired contact(s)
       operationId: doSearchContact
       consumes:
