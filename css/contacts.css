@@ -43,7 +43,7 @@ h1 {
     padding: 10px 20px;
     border-radius: 5px;
     position: relative;
-    width: 100%; /* Make it span the full width of the page */
+    width: 100%;
     z-index: 1000;
 }
 
@@ -200,4 +200,79 @@ h1 {
 
 #contactsListDiv {
     display: none;
+}
+
+
+.error-message {
+    color: rgb(159, 0, 0);
+    font-size: 0.9rem;
+    display: none;
+    font-family: 'kalam';
+}
+
+#contactsListDiv {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #01284c;
+}
+
+#contactsListDiv h2 {
+    font-family: 'Kalam', cursive;
+    color: #10467a;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#contactsTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Kalam', cursive;
+}
+
+#contactsTable thead {
+    background-color: #10467a;
+    color: white;
+}
+
+#contactsTable th, #contactsTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e5e2e2;
+}
+
+#contactsTable th {
+    font-size: 1.2rem;
+}
+
+#contactsTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+#contactsTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#contactsTable tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+#contactsTable tbody tr td button {
+    font-family: 'Kalam', cursive;
+    border: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    color: white;
+    background-color: #10467a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+#contactsTable tbody tr td button:hover {
+    background-color: #2b89e0;
 }
