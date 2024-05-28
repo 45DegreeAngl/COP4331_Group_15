@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/code.js"></script>
+    <script>
+        function displayUsername() {
+            const firstName = localStorage.getItem("firstName");
+            const lastName = localStorage.getItem("lastName");
+            if (firstName && lastName) {
+                document.getElementById("welcomeMessage").innerText = `Welcome, ${firstName}`;
+            } else {
+                document.getElementById("welcomeMessage").innerText = "Welcome, User";
+            }
+        }
+
+        function showForm(formId) {
+            document.getElementById('addContactDiv').style.display = 'none';
+            document.getElementById('searchDiv').style.display = 'none';
+            document.getElementById('contactsListDiv').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function editContact(contact) {
+            // Fill the form with the contact details
+            document.getElementById("firstName").value = contact.firstName;
+            document.getElementById("lastName").value = contact.lastName;
+            document.getElementById("email").value = contact.email;
+            document.getElementById("phone").value = contact.phone;
+
+            // Change form submit event to update contact instead of adding
+            document.getElementById("addContactForm").onsubmit = function() {
+                return updateContact(contact.id);
+            };
+
+            // Show the add contact form
+            showForm('addContactDiv');
+        }
+
+        function loadContacts() {
+            let userId = getUserIdFromCookie(); // Implement this function to get userId from cookie
+
+            let tmp = { userId: userId };
+            let jsonPayload = JSON.stringify(tmp);
+
+            let url = urlBase + '/GetContacts.' + extension;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+            try {
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let jsonObject = JSON.parse(xhr.responseText);
+                        let contactsTableBody = document.getElementById("contactsTableBody");
+                        contactsTableBody.innerHTML = ""; // Clear current content
+
+                        jsonObject.results.forEach(contact => {
+                            let row = contactsTableBody.insertRow();
+                            row.insertCell(0).innerText = contact.firstName;
+                            row.insertCell(1).innerText = contact.lastName;
+                            row.insertCell(2).innerText = contact.email;
+                            row.insertCell(3).innerText = contact.phone;
+                            let actionsCell = row.insertCell(4);
+
+                            let editButton = document.createElement("button");
+                            editButton.innerText = "Edit";
+                            editButton.onclick = function() { editContact(contact); };
+                            actionsCell.appendChild(editButton);
+
+                            let deleteButton = document.createElement("button");
+                            deleteButton.innerText = "Delete";
+                            deleteButton.onclick = function() { deleteContact(contact.id); };
+                            actionsCell.appendChild(deleteButton);
+                        });
+
+                        document.getElementById('contactsListDiv').style.display = 'block'; // Show the contacts list
+                    }
+                };
+                xhr.send(jsonPayload);
+            } catch (err) {
+                document.getElementById("contactAddResult").innerHTML = err.message;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            displayUsername();
+        });
+
+        function searchContacts() {
+            let srch = document.getElementById("searchText").value;
+            let userId = getUserIdFromCookie(); // Implement this function to get userId from cookie
+
+            let tmp = { search: srch, userId: userId };
+            let jsonPayload = JSON.stringify(tmp);
+
+            let url = urlBase + '/SearchContacts.' + extension;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+            try {
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let jsonObject = JSON.parse(xhr.responseText);
+                        let contactsTableBody = document.getElementById("contactsTableBody");
+                        contactsTableBody.innerHTML = ""; // Clear current content
+
+                        jsonObject.results.forEach(contact => {
+                            let row = contactsTableBody.insertRow();
+                            row.insertCell(0).innerText = contact.firstName;
+                            row.insertCell(1).innerText = contact.lastName;
+                            row.insertCell(2).innerText = contact.email;
+                            row.insertCell(3).innerText = contact.phone;
+                            let actionsCell = row.insertCell(4);
+
+                            let editButton = document.createElement("button");
+                            editButton.innerText = "Edit";
+                            editButton.onclick = function () { editContact(contact); };
+                            actionsCell.appendChild(editButton);
+
+                            let deleteButton = document.createElement("button");
+                            deleteButton.innerText = "Delete";
+                            deleteButton.onclick = function () { deleteContact(contact.id); };
+                            actionsCell.appendChild(deleteButton);
+                        });
+
+                        document.getElementById('contactsListDiv').style.display = 'block'; // Show the contacts list
+                    }
+                };
+                xhr.send(jsonPayload);
+            } catch (err) {
+                document.getElementById("colorSearchResult").innerHTML = err.message;
+            }
+        }
+    </script>
+</head>
+<body class="contact-manager-background">
+    <h1 id="welcomeMessage">Contact Manager</h1>
+
+    <!-- Selection Menu -->
+    <div id="selectionMenu">
+        <button onclick="showForm('addContactDiv')">Add Contact</button>
+        <button onclick="showForm('searchDiv')">Search Contacts</button>
+    </div>
+
+    <!-- Form for Adding New Contact -->
+    <div id="addContactDiv" style="display: none;">
+        <h2>Add New Contact</h2>
+        <form id="addContactForm" onsubmit="return addContact();">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required><br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required><br>
+            <button type="submit">Add Contact</button>
+        </form>
+        <div id="contactAddResult"></div>
+    </div>
+
+    <!-- Search Bar -->
+    <div id="searchDiv" style="display: none;">
+        <h2>Search Contacts</h2>
+        <input type="text" id="searchText" placeholder="Search by name">
+        <button onclick="searchContacts();">Search</button>
+        <div id="colorSearchResult"></div>
+    </div>
+
+    <!-- Contacts List -->
+    <div id="contactsListDiv" style="display: none;">
+        <h2>Contacts List</h2>
+        <table id="contactsTable">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="contactsTableBody">
+                <!-- Contacts will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
