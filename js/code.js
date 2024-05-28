@@ -159,9 +159,6 @@ function doSignUp(event) {
 
 }
 
-
-
-
 function saveCookie()
 {
 	let minutes = 20;
@@ -203,6 +200,21 @@ function readCookie()
 	}
 }
 
+function getUserIdFromCookie()
+{
+	let userId = -1;
+    let data = document.cookie;
+    let splits = data.split(",");
+    for(var i = 0; i < splits.length; i++) {
+        let thisOne = splits[i].trim();
+        let tokens = thisOne.split("=");
+        if (tokens[0] === "userId") {
+            userId = parseInt(tokens[1].trim());
+        }
+    }
+    return userId;
+}
+
 function doLogout()
 {
 	userId = 0;
@@ -234,83 +246,96 @@ function searchContact()
 
 }
 
-function addContact()
-{
-	
+function addContact(event) {
+    event.preventDefault();
+
+	//clear all messages
+    document.getElementById('firstNameError').style.display = 'none';
+    document.getElementById('lastNameError').style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    document.getElementById('phoneError').style.display = 'none';
+
+	//read input
+	var firstName = document.getElementById('firstName').value;
+    var lastName = document.getElementById('lastName').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var userId = getUserIdFromCookie(); 
+
+    // validate input
+    var isValid = true;
+
+    if (!firstName) {
+        document.getElementById('firstNameError').innerText = 'First name is required.';
+        document.getElementById('firstNameError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!lastName) {
+        document.getElementById('lastNameError').innerText = 'Last name is required.';
+        document.getElementById('lastNameError').style.display = 'block';
+        isValid = false;
+    }
+
+	//validate email address format
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    }
+
+	//validate number format
+    var phonePattern = /^(?:\d{10}|\d{3}-\d{3}-\d{4})$/;
+    if (!phonePattern.test(phone)) {
+        document.getElementById('phoneError').innerText = 'Please enter a valid phone number.';
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!isValid) {
+        return;
+    }
+
+    // group the data to send it
+    var data = {
+        FirstName: firstName,
+        LastName: lastName,
+        Email: email,
+        Phone: phone,
+        UserID: userId
+    };
+
+    // create ajax request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'LAMPAPI/AddContact.php', true); //path to api endpoint file
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // process server response
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.error === "") {
+                document.getElementById('contactAddResult').innerText = 'Contact added successfully!';
+                document.getElementById('contactAddResult').style.color = 'green';
+                document.getElementById('addContactForm').reset();
+            } else {
+                document.getElementById('contactAddResult').innerText = 'Failed to add contact: ' + response.error;
+                document.getElementById('contactAddResult').style.color = 'red';
+            }
+        }
+    };
+    // Send the request with the data
+    xhr.send(JSON.stringify(data));
 }
 
-function addColor()
-{
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
 
-	let tmp = {color:newColor,userId,userId};
-	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/AddColor.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
+
+function editContact(contactId) {
+    
 }
 
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
-
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
+function deleteContact(contactId) {
+   
 }
