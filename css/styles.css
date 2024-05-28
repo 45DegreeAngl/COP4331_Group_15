@@ -109,8 +109,8 @@ body
 .signup-container .signup-button-left button:hover,
 .signup-container .signup-button-right button:hover {
     font-family: 'Kalam', cursive;
-    background-color: #10467Aaf;
-    color: black;
+    background-color: #2b89e0;
+
 }
 
 
@@ -226,8 +226,8 @@ body
 .login-container .login-button-right button:hover,
 .login-container .login-button-center button:hover {
     font-family: 'Kalam', cursive;
-    background-color: #10467Aaf;
-    color: black;
+    background-color: #2b89e0;
+
 }
 
 #loginResult {
@@ -275,6 +275,11 @@ body
 
 
 
+.main-page {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #title {
     font-size: 3rem;
@@ -288,22 +293,23 @@ body
     text-align: center;
     justify-content: center;
     position: absolute;
-    top: 380px;
+    padding-top: 15px;
 }
 
 .signup-login-button {
     font-family: 'Kalam', cursive;
     border: none;
     position: absolute;
-    top: 515px;
+    display: flex;
+    margin-top: 170px;
 }
 
-.signup-login-button button {
+.btn-custom {
     font-family: 'Kalam', cursive;
     border: none;
     font-size: 1.2rem;
     padding: 10px 20px;
-    display: flex;
+    display:inline-block;
     align-items: center;
     justify-content: center;
     color: white;
@@ -311,11 +317,11 @@ body
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;
 }
 
-.signup-login-button button:hover {
-    background-color: #10467aaf;
-    color: black;
+.btn-custom:hover {
+    background-color: #2b89e0;
 }
 
 .kalam-light {
@@ -324,21 +330,3 @@ body
     font-style: normal;
   }
 
-/* ------------------------------------------------------------------------------------------------------- */
-/* Contact Manager Page's styling */
-/* ------------------------------------------------------------------------------------------------------- */
-
-.contact-manager-background {
-    background-image: url("../images/Blurry_COP4331_Homepage_Background_Blurred_Version.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
