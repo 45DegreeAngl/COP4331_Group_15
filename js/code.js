@@ -212,6 +212,33 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
+function display(formId) {
+    document.getElementById('addContactDiv').style.display = 'none';
+	document.getElementById('searchDiv').style.display = 'none';
+	document.getElementById('contactsListDiv').style.display = 'none';
+    document.getElementById(formId).style.display = 'block';
+	if (formId == 'searchDiv')
+		document.getElementById('contactsListDiv').style.display = 'block';
+	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'none';
+}
+function displaySearchAddButtons() {
+    document.getElementById('addContactDiv').style.display = 'none';
+	document.getElementById('searchDiv').style.display = 'none';
+	document.getElementById('contactsListDiv').style.display = 'none';
+	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'flex';
+}
+
+
+function searchContact()
+{
+
+}
+
+function addContact()
+{
+	
+}
+
 function addColor()
 {
 	let newColor = document.getElementById("colorText").value;
