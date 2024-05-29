@@ -1,3 +1,4 @@
+
 const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
@@ -225,6 +226,12 @@ function doLogout()
 }
 
 function display(formId) {
+
+	document.getElementById('searchText').value = "";
+	document.getElementById('firstName').value = "";
+	document.getElementById('lastName').value = "";
+	document.getElementById('email').value = "";
+	document.getElementById('phone').value = "";
     document.getElementById('addContactDiv').style.display = 'none';
 	document.getElementById('searchDiv').style.display = 'none';
 	document.getElementById('contactsListDiv').style.display = 'none';
@@ -241,10 +248,128 @@ function displaySearchAddButtons() {
 }
 
 
-function searchContact()
-{
+
+let allRetrievedConatacts = [];
+
+function displayContacts(){
+
+	let userId = getUserIdFromCookie();
+	document.getElementById("contactSearchResult").innerHTML = "";
+
+	let tmp = {Search: "", UserID: userId};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/SearchContacts.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+				
+				if(jsonObject.results){
+
+					// Stores all of the contacts into an array
+					allRetrievedConatacts = jsonObject.results;
+
+					// Sorts all of the contacts into alphabetical order, going from first name to last name
+					allRetrievedConatacts = jsonObject.results.sort(function(a, b){
+						if (a.FirstName.toLowerCase() < b.FirstName.toLowerCase()) return -1;
+						if (a.FirstName.toLowerCase() > b.FirstName.toLowerCase()) return 1;
+						else{
+							if (a.LastName.toLowerCase() < b.LastName.toLowerCase()) return -1;
+							if (a.LastName.toLowerCase() > b.LastName.toLowerCase()) return 1;
+						}
+						return 0;
+					});
+
+
+					let table = document.getElementById("contactsTableBody");
+					table.innerHTML ="";
+
+					// Iterates through all of the contacts and puts them into a table
+					allRetrievedConatacts.forEach(contact => {
+
+						const tableBody = document.getElementById('contactsTableBody');
+						const newRow = document.createElement('tr');
+
+						const firstNameColumn = document.createElement('td');
+						firstNameColumn.textContent = contact.FirstName;
+
+						const lastNameColumn = document.createElement('td');
+						lastNameColumn.textContent = contact.LastName;
+
+						const emailColumn = document.createElement('td');
+						emailColumn.textContent = contact.Email;
+
+						const phoneColumn = document.createElement('td');
+						phoneColumn.textContent = contact.Phone;
+
+						const actionsColumn = document.createElement('td');
+						actionsColumn.innerHTML = `
+							<button onclick="editContact(${contact.UserID})">Edit</button>
+							<button onclick="deleteContact(${contact.UserID})">Delete</button>
+        				`;
+
+						newRow.appendChild(firstNameColumn);
+						newRow.appendChild(lastNameColumn);
+						newRow.appendChild(emailColumn);
+						newRow.appendChild(phoneColumn);
+						newRow.appendChild(actionsColumn);
+
+						tableBody.appendChild(newRow);
+					});
+				}
+
+				else {
+					document.getElementById("contactSearchResult").innerText = "No contacts found.";
+				}
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+}
+
+
+function searchContact() {
+
+    let searchText = document.getElementById("searchText").value.toLowerCase();
+	let rows = document.getElementById('contactsTableBody').getElementsByTagName('tr');
+
+	// Iterates through the entries in the table and displays or hides the entries depending on whether they match the input in the search bar
+	for (i = 0; i< rows.length; i++){
+
+		let firstNameRow = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+		let lastNameRow = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+
+		let fullName = `${firstNameRow} ${lastNameRow}`;
+
+		if (fullName.includes(searchText)) {
+            rows[i].style.display = '';
+        } 
+		
+		else {
+            rows[i].style.display = 'none';
+        }
+	}
 
 }
+
+function clearContactAddResult(){
+	document.getElementById('contactAddResult').innerHTML = "";
+}
+
+
 
 function addContact(event) {
     event.preventDefault();

@@ -17,9 +17,6 @@
                 readCookie();
             }, false);
         </script>
-        
-
-
     </head>
 
     <body>        
@@ -36,7 +33,7 @@
         <div class="main-content">
             <h1 id="welcomeMessage">Signed in as (firstname lastname)</h1>
             <div class="search-add-buttons-container">
-                <button type="button" class="search-add-buttons" class="buttons" onclick="display('searchDiv')"> Search Contacts <i class="fas fa-search"></i> </button><br />
+                <button type="button" class="search-add-buttons" class="buttons" onclick="display('searchDiv'); displayContacts();"> Search Contacts <i class="fas fa-search"></i> </button><br />
                 <button type="button" class="search-add-buttons" class="buttons" onclick="display('addContactDiv')"> Add Contacts <i class="fas fa-plus"></i> </button><br />
             </div>
 
@@ -45,19 +42,19 @@
                 <h2>Add a New Contact</h2>
                 <form id="addContactForm" onsubmit="addContact(event);">                    
                     <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="first name" required>
+                    <input type="text" id="firstName" name="firstName" placeholder="first name" onfocus="clearContactAddResult()"   required>
                     <span id="firstNameError" class="error-message"></span><br>
             
                     <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="last name" required>
+                    <input type="text" id="lastName" name="lastName" placeholder="last name" onfocus="clearContactAddResult()" required>
                     <span id="lastNameError" class="error-message"></span><br>
             
                     <label for="email">Email:</label>                    
-                    <input type="email" id="email" name="email" placeholder="example@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="example@example.com" onfocus="clearContactAddResult()" required>
                     <span id="emailError" class="error-message"></span><br>
             
                     <label for="phone">Phone:</label>
-                    <input type="text" id="phone" name="phone" placeholder="xxx-xxx-xxxx" required>
+                    <input type="text" id="phone" name="phone" placeholder="xxx-xxx-xxxx" onfocus="clearContactAddResult()" required>
                     <span id="phoneError" class="error-message"></span><br>
             
                     <div class="button-container">
@@ -66,23 +63,25 @@
                     </div>
                 </form>
                 <div id="contactAddResult"></div>
+
+                <p id="contactList">
+                </p><br /><br />
             </div>
             
 
 
             <div id="searchDiv" >
                 <h2>Search Contacts</h2>
-                <input type="text" id="searchText" placeholder="Search by name, email, number..">
+                <input type="text" id="searchText" placeholder="Search by name, email, number.." oninput="searchContact()">
                 <div class="button-container">
                     <button type="button" onclick="displaySearchAddButtons()">Back</button>
-                    <button onclick="searchContact();">Search</button>
                 </div>
                 <div id="contactSearchResult"></div>
             </div>
 
             <div id="contactsListDiv">
                 <h2>Contacts List</h2>
-                <table id="contactsTable">
+                <table id="contactsTable" >
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -90,13 +89,13 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Actions</th> 
-                            <th> </th>
                         </tr>
                     </thead>
                     <tbody id="contactsTableBody">
                         <!-- Contacts will show here -->
                     </tbody>
                 </table>
+                
             </div>
         </div>
 
