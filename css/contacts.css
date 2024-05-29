@@ -248,9 +248,10 @@ h1 {
     font-size: 1.2rem;
 }
 
-#contactsTable tr:hover {
-    background-color: #f1f1f1;
+#contactsTable th, td {
+    border: 0.5px solid #e5e2e2;
 }
+
 
 #contactsTable tbody tr:nth-child(even) {
     background-color: #f9f9f9;
