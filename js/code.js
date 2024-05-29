@@ -327,7 +327,7 @@ function displayContacts(){
 				}
 
 				else {
-					document.getElementById("contactSearchResult").innerText = "No contacts found.";
+					//document.getElementById("contactSearchResult").innerText = "No contacts found.";
 				}
 			}
 		};
