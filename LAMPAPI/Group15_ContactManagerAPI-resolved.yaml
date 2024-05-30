@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: This is the API documentaion for the COP4331 Contact Manager Small Project
-  version: "1.0"
+  version: 1.0.0
   title: Contact Manager
   contact:
     email: shanewelz@gmail.com
@@ -146,7 +146,7 @@ paths:
         description: Delete
         required: false
         schema:
-          $ref: '#/definitions/Contact'
+          $ref: '#/definitions/Delete'
       responses:
         "200":
           description: OK
@@ -253,39 +253,39 @@ definitions:
     type: object
     required:
     - EmailNew
-    - EmailOld
     - FirstNameNew
-    - FirstNameOld
+    - ID
     - LastNameNew
-    - LastNameOld
     - PhoneNew
-    - PhoneOld
     - UserID
     properties:
-      FirstNameOld:
-        type: string
-        example: John
-      LastNameOld:
-        type: string
-        example: Smith
-      PhoneOld:
-        type: string
-        example: (555)555-5555
-      EmailOld:
-        type: string
-        example: JohnSmith@hotmail.com
       FirstNameNew:
         type: string
-        example: Jon
+        example: Bob
       LastNameNew:
         type: string
-        example: Smith
+        example: Bob
       PhoneNew:
         type: string
         example: (555)123-4567
       EmailNew:
         type: string
-        example: JohnSmith@outlook.com
+        example: bob@outlook.com
+      UserID:
+        type: integer
+        example: 1
+      ID:
+        type: integer
+        example: 6
+  Delete:
+    type: object
+    required:
+    - ID
+    - UserID
+    properties:
+      ID:
+        type: integer
+        example: 23
       UserID:
         type: integer
         example: 1
