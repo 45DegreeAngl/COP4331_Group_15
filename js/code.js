@@ -1,5 +1,5 @@
 
-const urlBase = 'http://cop4331-kr.xyz/LAMPAPI';
+const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
