@@ -114,6 +114,24 @@ h1 {
     text-align: center;
 }
 
+#editDiv {
+    display: none;
+    background-color: #b0cfec;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #01284c;
+    width: 80%;
+    max-width: 450px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+
+
+
+
+
 #searchDiv {
     display: none;
     background-color: #b0cfec;
@@ -126,7 +144,7 @@ h1 {
     text-align: center;
 }
 
-#addContactDiv h2, #searchDiv h2 {
+#addContactDiv h2, #searchDiv h2, #editDiv h2 {
     font-family: 'Kalam', cursive;
     color: #10467a;
     margin-bottom: 5px;
@@ -138,13 +156,13 @@ h1 {
     margin-bottom: 15px;
 }
 
-#addContactDiv form, #searchDiv form {
+#addContactDiv form, #searchDiv form, #editDiv form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#addContactDiv label, #searchDiv label {
+#addContactDiv label, #searchDiv label, #editDiv label {
     font-family: 'Kalam', cursive;
     color: #10467a;
     margin-bottom: 5px;
@@ -153,7 +171,7 @@ h1 {
     font-size: 1.3rem;
 }
 
-#addContactDiv input, #searchDiv input {
+#addContactDiv input, #searchDiv input, #editDiv input {
     border-radius: 10px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -180,6 +198,22 @@ h1 {
     white-space: nowrap; 
 }
 
+#editDiv button {
+    font-family: 'Kalam', cursive;
+    border: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    color: white;
+    background-color: #10467a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px;
+    width: auto;
+    text-align: center;
+    white-space: nowrap; 
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -187,11 +221,11 @@ h1 {
     margin-top: 10px;
 }
 
-#addContactDiv button:hover, #searchDiv button:hover {
+#addContactDiv button:hover, #searchDiv button:hover, #editDiv button:hover {
     background-color: #2b89e0;
 }
 
-#contactAddResult, #colorSearchResult {
+#contactAddResult, #editResult {
     margin-top: 20px;
     font-family: 'Kalam', cursive;
     color: #10467a;
@@ -202,8 +236,12 @@ h1 {
 }
 
 .error-message {
-    color: rgb(159, 0, 0);
-    font-size: 0.9rem;
+    margin-top: 15px;
+    border: 2px solid #b22222;
+    padding: 10px 40px;
+    background-color: #f8d7da;
+    color: black;
+    font-size: 1.0rem;
     display: none;
     font-family: 'kalam';
 }
@@ -246,9 +284,16 @@ h1 {
     font-size: 1.2rem;
 }
 
+#contactsTable, #contactsTable th, #contactsTable td {
+    border: 1px solid #e5e2e2;
+    border-collapse: collapse;
+}
+
+/*
 #contactsTable tr:hover {
     background-color: #f1f1f1;
 }
+*/
 
 #contactsTable tbody tr:nth-child(even) {
     background-color: #f9f9f9;
