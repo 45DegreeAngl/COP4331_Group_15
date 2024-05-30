@@ -1,10 +1,7 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$FirstNameOld = $inData["FirstNameOld"];
-    $LastNameOld = $inData["LastNameOld"];
-    $PhoneOld = $inData["PhoneOld"];
-    $EmailOld = $inData["EmailOld"];
+	$ID = $inData["ID"];
 	$UserID = $inData["UserID"];
     $FirstNameNew = $inData["FirstNameNew"];
     $LastNameNew = $inData["LastNameNew"];
@@ -20,8 +17,10 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET FirstName =? , LastName =?, Phone = ?, Email =?  WHERE (FirstName =? AND LastName =? AND Phone = ? AND Email =? AND UserID =?)");
-		$stmt->bind_param("sssssssss", $FirstNameNew, $LastNameNew, $PhoneNew, $EmailNew, $FirstNameOld, $LastNameOld, $PhoneOld, $EmailOld, $UserID);
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName =? , LastName =?, Phone = ?, Email =?  WHERE ID = ? AND UserID = ?");
+		$stmt->bind_param("ssssii", $FirstNameNew, $LastNameNew, $PhoneNew, $EmailNew, $ID, $UserID);
+
+
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
