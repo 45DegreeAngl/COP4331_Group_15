@@ -1,5 +1,5 @@
 
-const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
+const urlBase = 'http://cop4331-kr.xyz/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -232,19 +232,41 @@ function display(formId) {
 	document.getElementById('lastName').value = "";
 	document.getElementById('email').value = "";
 	document.getElementById('phone').value = "";
+	document.getElementById('editResult').innerText = '';
+	
+	
+	
+
     document.getElementById('addContactDiv').style.display = 'none';
 	document.getElementById('searchDiv').style.display = 'none';
 	document.getElementById('contactsListDiv').style.display = 'none';
+	document.getElementById('editDiv').style.display = 'none';
+
     document.getElementById(formId).style.display = 'block';
-	if (formId == 'searchDiv')
+
+
+	if (formId === 'searchDiv')
 		document.getElementById('contactsListDiv').style.display = 'block';
 	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'none';
+
 }
+
+
 function displaySearchAddButtons() {
     document.getElementById('addContactDiv').style.display = 'none';
 	document.getElementById('searchDiv').style.display = 'none';
 	document.getElementById('contactsListDiv').style.display = 'none';
 	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'flex';
+	document.getElementById("firstNameError").innerHTML = "";
+	document.getElementById("lastNameError").innerHTML = "";
+	document.getElementById("emailError").innerHTML = "";
+	document.getElementById("phoneError").innerHTML = "";
+	document.getElementById('firstNameError').style.display = 'none';
+    document.getElementById('lastNameError').style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    document.getElementById('phoneError').style.display = 'none';
+	document.getElementById('contactAddResult').style.display = 'none';
+	document.getElementById("contactAddResult").innerHTML = "";
 }
 
 
@@ -255,6 +277,16 @@ function displayContacts(){
 
 	let userId = getUserIdFromCookie();
 	document.getElementById("contactSearchResult").innerHTML = "";
+	document.getElementById("firstNameEditError").innerHTML = "";
+	document.getElementById("lastNameEditError").innerHTML = "";
+	document.getElementById("emailEditError").innerHTML = "";
+	document.getElementById("phoneEditError").innerHTML = "";
+	document.getElementById('firstNameEditError').style.display = 'none';
+    document.getElementById('lastNameEditError').style.display = 'none';
+    document.getElementById('emailEditError').style.display = 'none';
+    document.getElementById('phoneEditError').style.display = 'none';
+
+
 
 	let tmp = {Search: "", UserID: userId};
 	let jsonPayload = JSON.stringify( tmp );
@@ -311,10 +343,11 @@ function displayContacts(){
 						phoneColumn.textContent = contact.Phone;
 
 						const actionsColumn = document.createElement('td');
+
 						actionsColumn.innerHTML = `
-							<button onclick="editContact(${contact.UserID})">Edit</button>
-							<button onclick="deleteContact(${contact.UserID})">Delete</button>
-        				`;
+                            <button onclick='display("editDiv"); fillOutForm(${contact.ID});'>Edit</button>
+                            <button onclick='deleteContact(${contact.ID})'>Delete</button>
+                        `;
 
 						newRow.appendChild(firstNameColumn);
 						newRow.appendChild(lastNameColumn);
@@ -367,6 +400,12 @@ function searchContact() {
 
 function clearContactAddResult(){
 	document.getElementById('contactAddResult').innerHTML = "";
+	document.getElementById('firstNameError').style.display = 'none';
+    document.getElementById('lastNameError').style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    document.getElementById('phoneError').style.display = 'none';
+	document.getElementById("editResult").style.display = 'none';
+
 }
 
 
@@ -389,6 +428,12 @@ function addContact(event) {
 
     // validate input
     var isValid = true;
+
+	if (userId === -1) {
+        document.getElementById('contactAddResult').innerText = 'Session timed out. Please log in again.';
+        document.getElementById('contactAddResult').style.color = 'red';
+        return;
+    }
 
     if (!firstName) {
         document.getElementById('firstNameError').innerText = 'First name is required.';
@@ -454,11 +499,125 @@ function addContact(event) {
     xhr.send(JSON.stringify(data));
 }
 
+function fillOutForm (contactId) {
+
+	let contact = allRetrievedConatacts.find(c => c.ID === contactId);
+
+	document.getElementById("firstNameEdit").value = contact.FirstName;
+	document.getElementById("lastNameEdit").value = contact.LastName;
+	document.getElementById("emailEdit").value = contact.Email;
+	document.getElementById("phoneEdit").value = contact.Phone;
+
+	
+	document.getElementById('contactIdEdit').value = contact.ID;
+	
+
+}
 
 
+function editContact(event) {
 
-function editContact(contactId) {
-    
+	event.preventDefault();
+
+	//clear all messages
+    document.getElementById('firstNameEditError').style.display = 'none';
+    document.getElementById('lastNameEditError').style.display = 'none';
+    document.getElementById('emailEditError').style.display = 'none';
+    document.getElementById('phoneEditError').style.display = 'none';
+
+	//read input
+	var contactId = document.getElementById('contactIdEdit').value;
+	var firstName = document.getElementById('firstNameEdit').value;
+    var lastName = document.getElementById('lastNameEdit').value;
+    var email = document.getElementById('emailEdit').value;
+    var phone = document.getElementById('phoneEdit').value;
+    var userId = getUserIdFromCookie(); 
+
+	
+	console.log(contactId);
+	console.log(firstName);
+	console.log(lastName);
+	console.log(email);
+	console.log(phone);
+	console.log(userId);
+
+    // validate input
+    var isValid = true;
+
+    if (!firstName) {
+        document.getElementById('firstNameEditError').innerText = 'First name is required.';
+        document.getElementById('firstNameEditError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!lastName) {
+        document.getElementById('lastNameEditError').innerText = 'Last name is required.';
+        document.getElementById('lastNameEditError').style.display = 'block';
+        isValid = false;
+    }
+
+	//validate email address format
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById('emailEditError').innerText = 'Please enter a valid email address.';
+        document.getElementById('emailEditError').style.display = 'block';
+        isValid = false;
+    }
+
+	//validate number format
+    var phonePattern = /^(?:\d{10}|\d{3}-\d{3}-\d{4})$/;
+    if (!phonePattern.test(phone)) {
+        document.getElementById('phoneEditError').innerText = 'Please enter a valid phone number.';
+        document.getElementById('phoneEditError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!isValid) {
+        return;
+    }
+
+    // group the data to send it
+    var data = {
+		ID: contactId,
+        FirstNameNew: firstName,
+        LastNameNew: lastName,
+        EmailNew: email,
+        PhoneNew: phone,
+        UserID: userId
+    };
+
+
+	let url = urlBase + '/EditContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    // process server response
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.error === "") {
+                document.getElementById('editResult').innerText = 'Contact edited successfully!';
+                document.getElementById('editResult').style.color = 'green';
+                document.getElementById('editForm').reset();
+
+				setTimeout(function() {
+                    display("searchDiv");
+                    displayContacts()
+                }, 1200);
+
+
+            } else {
+                document.getElementById('editResult').innerText = 'Failed to edit contact: ' + response.error;
+                document.getElementById('editResult').style.color = 'red';
+            }
+        }
+    };
+
+
+    // Send the request with the data
+    xhr.send(JSON.stringify(data));    
 }
 
 function deleteContact(contactId) {
