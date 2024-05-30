@@ -72,7 +72,7 @@
 
             <div id="searchDiv" >
                 <h2>Search Contacts</h2>
-                <input type="text" id="searchText" placeholder="Search by name, email, number.." oninput="searchContact()">
+                <input type="text" id="searchText" placeholder="Search by first name and last name" oninput="searchContact()">
                 <div class="button-container">
                     <button type="button" onclick="displaySearchAddButtons()">Back</button>
                 </div>
@@ -97,6 +97,44 @@
                 </table>
                 
             </div>
+
+
+
+            <div id="editDiv">
+                <h2>Editing Contact</h2>
+                <form id="editForm" onsubmit="editContact(event);">
+                    <input type="hidden" id="contactIdEdit" name="contactIdEdit">   
+                                     
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstNameEdit" name="firstNameEdit" placeholder="first name" required>
+                    <span id="firstNameEditError" class="error-message"></span><br>
+            
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastNameEdit" name="lastNameEdit" placeholder="last name" required>
+                    <span id="lastNameEditError" class="error-message"></span><br>
+            
+                    <label for="email">Email:</label>                    
+                    <input type="email" id="emailEdit" name="emailEdit" placeholder="example@example.com" required>
+                    <span id="emailEditError" class="error-message"></span><br>
+            
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phoneEdit" name="phoneEdit" placeholder="xxx-xxx-xxxx" required>
+                    <span id="phoneEditError" class="error-message"></span><br>
+            
+                    <div class="edit-button-container">
+                        <button type="button" onclick="display('searchDiv'); displayContacts();">Back</button>
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
+                <div id="editResult"></div>
+
+            </div>
+
+
+
+
+
+
         </div>
 
 
