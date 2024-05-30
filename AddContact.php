@@ -7,6 +7,12 @@
     $Email = $inData["Email"];
 	$UserID = $inData["UserID"];
 
+	if ($UserID <= 0) {
+		returnWithError("Session timed out. Please log in again.");
+		exit();
+	}
+
+
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
@@ -17,9 +23,10 @@
 		$stmt = $conn->prepare("INSERT into Contacts (FirstName,LastName,Phone,Email,UserID) VALUES(?,?,?,?,?)");
 		$stmt->bind_param("sssss", $FirstName, $LastName, $Phone, $Email, $UserID);
 		$stmt->execute();
+		$contactID = $conn->insert_id;
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
+		returnWithIdInfo($contactID);
 	}
 
 	function getRequestInfo()
@@ -36,6 +43,12 @@
 	function returnWithError( $err )
 	{
 		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+
+	function returnWithIdInfo($contactID) 
+	{
+		$retValue = '{"ID":' . $contactID . ',"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
