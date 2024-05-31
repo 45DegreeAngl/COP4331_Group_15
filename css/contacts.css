@@ -307,13 +307,14 @@ h1 {
     font-family: 'Kalam', cursive;
     border: none;
     font-size: 1rem;
-    padding: 5px 10px;
+    /*padding: 5px 10px;*/
     color: white;
     background-color: #10467a;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 0 5px;
+    width: 65px;
 }
 
 #contactsTable tbody tr td button:hover {
