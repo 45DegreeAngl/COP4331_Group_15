@@ -1,5 +1,5 @@
 
-const urlBase = 'http://cop4331-kr.xyz/LAMPAPI';
+const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -621,5 +621,33 @@ function editContact(event) {
 }
 
 function deleteContact(contactId) {
-   
+    if (!confirm("Are you sure you want to delete this contact?")) return;
+
+    let userId = getUserIdFromCookie();
+    let data = { ID: contactId, UserID: userId };
+
+    let jsonPayload = JSON.stringify(data);
+
+    let url = urlBase + '/DeleteContact.' + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            console.log(xhr.responseText);
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.error === "") {
+                    displayContacts();
+                } else {
+                    alert('Failed to delete contact: ' + response.error);
+                }
+            } else {
+                alert('Failed to communicate with server.');
+            }
+        }
+    };
+
+    xhr.send(jsonPayload);
 }
