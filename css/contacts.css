@@ -314,11 +314,6 @@ h1 {
     border-collapse: collapse;
 }
 
-/*
-#contactsTable tr:hover {
-    background-color: #f1f1f1;
-}
-*/
 
 #contactsTable tbody tr:nth-child(even) {
     background-color: #f9f9f9;
@@ -339,6 +334,7 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 0 5px;
+    width: 65px;
 }
 
 #contactsTable tbody tr td button:hover {
