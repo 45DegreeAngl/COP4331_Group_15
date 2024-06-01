@@ -1,44 +1,67 @@
+
 <html lang="en">
 <head>
-    <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>Signup Page</title>
 	<script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Kalam:wght@300;400;700&display=swap;" rel="stylesheet">
 </head>
+
 <body>
     <section class="signup-container">
         <header>Welcome!</header>
-        <form action="#" class="signup-form">
+        <form action="#" class="signup-form" onsubmit="doSignUp(event)">
             <div class="signup-input-box">
-                <label>First Name:</label>
-                <input type="text" id="signupFirstName" placeholder="Enter first name" required/>
+                <div class="label-and-error">
+                    <label for="signupFirstName"> First Name:</label>
+                    <span class= "error-message" id="firstNameError"></span>
+                </div>
+                <input type="text" id="signupFirstName" placeholder="Enter first name"/>
             </div>
 
             <div class="signup-input-box">
-                <label>Last Name:</label>
-                <input type="text" id="signupLastName" placeholder="Enter last name" required/>
+                <div class="label-and-error">
+                    <label for="signupLastName"> Last Name:</label>
+                    <span class= "error-message" id="lastNameError"></span>
+                </div>
+                <input type="text" id="signupLastName" placeholder="Enter last name"/>
             </div>
 
 
             <div class="signup-input-box">
-                <label>Username:</label>
-                <input type="text" id="signupUsername" placeholder="Enter username" required/>
+                <div class="label-and-error">
+                    <label for="signupUsername"> Username:</label>
+                    <span class= "error-message" id="usernameError"></span>
+                </div>
+                <input type="text" id="signupUsername" placeholder="Enter username"/>
             </div>
 
             <div class="signup-input-box">
-                <label>Password:</label>
-                <input type="password" id="signupPassword" placeholder="Enter password" required/>
-            </div>
+                <div class="label-and-error">
+                    <label for="signupPassword"> Password:</label>
+                    <span class= "error-message" id="passwordError"></span>
+                </div>
+                <input type="password" id="signupPassword" placeholder="Enter password" onfocus="showPasswordRequirements()" onblur="hidePasswordRequirements()" oninput ="checkPassword()"/>
 
+                <div class="password-requirements" id="passwordRequirements">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li id="lengthRequirement">At least 8 characters</li>
+                        <li id="uppercaseRequirement">At least one uppercase letter</li>
+                        <li id="lowercaseRequirement">At least one lowercase letter</li>
+                        <li id="numberRequirement">At least one number</li>
+                        <li id="specialCharRequirement">At least one special character</li>
+                    </ul>
+                </div>
+            </div>
             <div class="signup-button-container">
                 <div class="signup-button-left">
                     <button type="button" id="backButton" onclick="goToIndex();">Home</button>
                 </div>
                 <div class="signup-button-right">
-                    <button type="submit" id="signupButton" onclick="doSignUp(event);">Sign Up</button>
+                    <button type="submit" id="signupButton">Sign Up</button>
                 </div>
             </div>
 
@@ -46,6 +69,7 @@
 
         </form>
     </section>
-
+    <script src="js/md5.js"></script>
+    <script src="js/code.js"></script>
 </body>
 </html>
