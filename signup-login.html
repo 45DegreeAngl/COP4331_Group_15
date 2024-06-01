@@ -1,8 +1,9 @@
+
 <html lang="en">
 <head>
-    <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
     <script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kalam:wght@300;400;700&display=swap;" rel="stylesheet">
@@ -11,17 +12,25 @@
 <body>
     <section class="login-container">
         <header>Welcome Back!</header>
-        <form action="#" class="login-form">
+        <form action="#" class="login-form" onsubmit="doLogin(event)">
             <div class="login-input-box">
-                <label>Username:</label>
+                <div class="label-and-error">
+                    <label for="loginUsername"> Username:</label>
+                    <span class= "error-message" id="usernameErrorLogin"></span>
+                </div>
                 <input type="text" id="loginUsername" placeholder="Enter username"/>
             </div>
+
             <div class="login-input-box">
-                <label>Password:</label>
+                <div class="label-and-error">
+                    <label for="loginPassword"> Password:</label>
+                    <span class= "error-message" id="PasswordErrorLogin"></span>
+                </div>
                 <input type="password" id="loginPassword" placeholder="Enter password"/>
             </div>
+
             <div class="login-button-center">
-                <button type="button" id="loginButton" onclick="doLogin();">Login</button>
+                <button type="submit" id="loginButton">Login</button>
             </div>
             <div class="login-button-container">
                 <div class="login-button-left">
@@ -31,8 +40,11 @@
                     <button type="button" id="signup-login-Button" onclick="goToSignup();">Sign Up</button>
                 </div>
             </div>
+
             <div id="loginResult" style="color: white;"></div>
         </form>
     </section>
+    <script src="js/md5.js"></script>
+    <script src="js/code.js"></script>
 </body>
 </html>
