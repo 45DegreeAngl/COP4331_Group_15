@@ -21,43 +21,55 @@ body
 .signup-container {
     font-size: 1.1rem;
     font-family: 'Kalam', cursive;
-    color: white;
-    position: fixed;
+    color: #10467a;
     top: 80px;
     max-width: 500px;
     width: 100%;
     border-radius: 10px;
+    box-shadow: 0 4px 8px #01284c;
+    background-color: #b0cfec;
    
 }
 
 .signup-container header{
     font-family: 'Kalam', cursive;
     font-size: 2.0rem;
-    color: white;
+    color: #10467a;
     font-weight: 500;
     text-align: center;
     padding: 40px 20px;
     margin-bottom: -50px;
-    background-color: #011529;
+    background-color: #b0cfec;
     border-radius: 10px;
 
 }
 
 .signup-container .signup-form{
     font-family: 'Kalam', cursive;
+    font-weight: 500;
     padding-top: 50px;
-    color: white;
+    color: #10467a;
     margin-top: 0px;
-    background-color: #011529;
+    background-color: #b0cfec;
     padding: 20px;
     border-radius: 10px;
 }
 
 .signup-container .signup-input-box{
+    font-weight: 600;
     font-family: 'Kalam', cursive;
     width: 80%;
     margin: 10px auto;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container .label-and-error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .signup-form .signup-input-box input{
@@ -102,7 +114,6 @@ body
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s;
-    
     margin-bottom: 20px;
 }
 
@@ -123,7 +134,18 @@ body
     margin-top: 5px;
     margin-bottom: 5px;
     font-family: 'Kalam', cursive;
-    color: white;
+    color: black !important;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.password-requirements {
+    display: none;
 }
 
 /* ------------------------------------------------------------------------------------------------------- */
@@ -141,41 +163,53 @@ body
 .login-container {
     font-size: 1.1rem;
     font-family: 'Kalam', cursive;
-    color: white;
-    position: fixed;
+    color: #10467a;
     top: 80px;
     max-width: 500px;
     width: 100%;
     border-radius: 10px;
+    box-shadow: 0 4px 8px #01284c;
+    background-color: #b0cfec;
 }
 
 .login-container header {
     font-family: 'Kalam', cursive;
     font-size: 2.0rem;
-    color: white;
+    color: #10467a;
     font-weight: 500;
     text-align: center;
     padding: 40px 20px;
     margin-bottom: -50px;
-    background-color: #011529;
+    background-color: #b0cfec;
     border-radius: 10px;
 }
 
 .login-container .login-form {
     font-family: 'Kalam', cursive;
+    font-weight: 500;
     padding-top: 50px;
-    color: white;
+    color: #10467a;
     margin-top: 0px;
-    background-color: #011529;
+    background-color: #b0cfec;
     padding: 20px;
     border-radius: 10px;
 }
 
 .login-container .login-input-box {
+    font-weight: 600;
     font-family: 'Kalam', cursive;
     width: 80%;
     margin: 10px auto;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container .label-and-error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .login-form .login-input-box input {
@@ -231,11 +265,14 @@ body
 }
 
 #loginResult {
+    display: block;
     font-size: 1.1em;
-    width: 90%;
+    width: 100%;
     text-align: center;
-    margin: 10px auto;
-    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Kalam', cursive;
+    color: black !important;
 }
 
 .login-button-center {
@@ -276,9 +313,11 @@ body
 
 
 .main-page {
-    display:flex;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 #title {
@@ -290,21 +329,17 @@ body
     background-color: #10467A;
     padding: 5px;
     border-radius: 10px;
+    margin-bottom: 20px;
     text-align: center;
     justify-content: center;
-    position: absolute;
     padding-top: 15px;
-    margin-top: 10px;
-    top: 400px;
 }
 
 .signup-login-button {
     font-family: 'Kalam', cursive;
     border: none;
-    position: absolute;
     display: flex;
-    margin-top: 10px;
-    top: 508px;
+    margin-top: 1px;
 }
 
 .btn-custom {
@@ -312,7 +347,7 @@ body
     border: none;
     font-size: 1.2rem;
     padding: 10px 20px;
-    display:inline-block;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     color: white;
@@ -320,6 +355,7 @@ body
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 0 10px;
     text-decoration: none;
 }
 
@@ -331,4 +367,4 @@ body
     font-family: "Kalam", cursive;
     font-weight: 300;
     font-style: normal;
-  }
+}
