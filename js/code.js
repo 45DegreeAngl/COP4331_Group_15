@@ -1,4 +1,3 @@
-
 const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
@@ -6,27 +5,42 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-function doLogin()
+function doLogin(event)
 {
+
+	event.preventDefault();
+
+	document.getElementById('usernameErrorLogin').textContent = '';
+	document.getElementById('PasswordErrorLogin').textContent = '';
+	document.getElementById("loginResult").innerHTML = "";
+
+	let isValid = true;
+
+
 	userId = 0;
 	firstName = "";
 	lastName = "";
 	
 	let login = document.getElementById("loginUsername").value;
 	let password = document.getElementById("loginPassword").value;
-
-	//	var hash = md5( password );
 	
-	document.getElementById("loginResult").innerHTML = "";
+	if(!login) {
+		document.getElementById('usernameErrorLogin').textContent = '* Username missing';
+		isValid = false;
+	}
 
-	if(!login || !password) {
-		document.getElementById("loginResult").innerHTML = "Please fill out all fields.";
-		return;
+	if(!password) {
+		document.getElementById('PasswordErrorLogin').textContent = '* Password missing';
+		isValid = false;
 	}
 
 
-	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
+	if(isValid == false) return;
+
+
+
+	var hash = md5( password );
+	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
@@ -79,9 +93,74 @@ function goToIndex(){
 }
 
 
+function checkPassword(){
+
+
+
+	let password = document.getElementById("signupPassword").value;
+
+	let isValid = true;
+
+	if (password.length >= 8) document.getElementById("lengthRequirement").style.color = 'green';
+	else{
+		document.getElementById("lengthRequirement").style.color = 'red';
+		isValid = false;
+	}
+
+	if (password !== password.toLowerCase()) document.getElementById("uppercaseRequirement").style.color = 'green';
+	else{
+		document.getElementById("uppercaseRequirement").style.color = 'red';
+		isValid = false;
+	}
+
+	if (password !== password.toUpperCase()) document.getElementById("lowercaseRequirement").style.color = 'green';
+	else{
+		document.getElementById("lowercaseRequirement").style.color = 'red';
+		isValid = false;
+	}
+
+
+	if (/\d/.test(password)) document.getElementById("numberRequirement").style.color = 'green';
+	else{
+		document.getElementById("numberRequirement").style.color = 'red';
+		isValid = false;
+	}
+
+	if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)) document.getElementById("specialCharRequirement").style.color = 'green';
+	else{
+		document.getElementById("specialCharRequirement").style.color = 'red';
+		isValid = false;
+	}
+
+
+	return isValid;
+
+
+
+}
+
+
+function showPasswordRequirements() {
+	document.getElementById("passwordRequirements").style.display = 'block';
+}
+
+function hidePasswordRequirements() {
+	document.getElementById("passwordRequirements").style.display = 'none';
+}
+
+
+
+
+
 function doSignUp(event) {
 
 	event.preventDefault();
+
+	document.getElementById('firstNameError').textContent = '';
+	document.getElementById('lastNameError').textContent = '';
+	document.getElementById('usernameError').textContent = '';
+	document.getElementById('passwordError').textContent = '';
+
 
 	let firstName = document.getElementById("signupFirstName").value;
 	let lastName = document.getElementById("signupLastName").value;
@@ -90,10 +169,42 @@ function doSignUp(event) {
 
 	document.getElementById("signinResultMessage").innerHTML = "";
 
-	if( !firstName || !lastName || !login || !password) {
-		document.getElementById("signinResultMessage").innerHTML = "Please fill out all fields.";
-		return;
+	let isValid = true;
+
+	if(!firstName) {
+		document.getElementById('firstNameError').textContent = '* First name missing';
+		isValid = false;
 	}
+
+	if(!lastName) {
+		document.getElementById('lastNameError').textContent = '* Last name missing';
+		isValid = false;
+	}
+
+	if(!login) {
+		document.getElementById('usernameError').textContent = '* Username missing';
+		isValid = false;
+	}
+
+	if(!checkPassword()) {
+		document.getElementById('passwordError').textContent = '* Password is not valid';
+		isValid = false;
+	}
+
+	if(!password) {
+		document.getElementById('passwordError').textContent = '* Password missing';
+		isValid = false;
+	}
+
+	let hashedPassword = '';
+	
+
+	if(isValid == false) return;
+
+	if(isValid) {
+		hashedPassword = md5(password);
+	}
+
 
 	/* Validation */
 	let userValidation = {Login: login};
@@ -114,12 +225,12 @@ function doSignUp(event) {
 				validationJsonObject = JSON.parse(this.responseText);
 
 				if (validationJsonObject.error && validationJsonObject.error.length > 0) {
-					document.getElementById("signinResultMessage").innerHTML = validationJsonObject.error;
+					document.getElementById("usernameError").innerHTML = `* ${validationJsonObject.error}`;
 				} else {
 					
 					/* Username is unqiue & no errors found. Continue with sign up. */
 
-					let newUser = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+					let newUser = {FirstName: firstName, LastName: lastName, Login: login, Password: hashedPassword};
 					let jsonPayload = JSON.stringify( newUser );
 
 					let url = urlBase + '/SignUp.' + extension;
@@ -137,7 +248,7 @@ function doSignUp(event) {
 								lastName.value = '';
 								login.value = '';
 								password.value = '';
-								document.getElementById("signinResultMessage").innerHTML = "User successfully signed up!\nPlease press 'Back' and login.";
+								document.getElementById("signinResultMessage").innerHTML = "User successfully signed up!";
 							}
 						};
 						xhr.send(jsonPayload);
@@ -198,6 +309,7 @@ function readCookie()
 	else
 	{
 		document.getElementById("welcomeMessage").innerHTML = "Welcome back, " + firstName + " " + lastName + "!";
+		document.getElementById("nav__title").innerHTML = "";
 	}
 }
 
@@ -225,14 +337,23 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
+let displayCount = 0;
+
 function display(formId) {
+
+	displayCount++;
 
 	document.getElementById('searchText').value = "";
 	document.getElementById('firstName').value = "";
 	document.getElementById('lastName').value = "";
 	document.getElementById('email').value = "";
 	document.getElementById('phone').value = "";
-	document.getElementById('editResult').innerText = '';
+	document.getElementById('phone').value = "";
+	
+	if (displayCount > 0) {
+		document.getElementById("welcomeMessage").innerHTML = "";
+		document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
+	}
 	
 	
 	
@@ -265,7 +386,6 @@ function displaySearchAddButtons() {
     document.getElementById('lastNameError').style.display = 'none';
     document.getElementById('emailError').style.display = 'none';
     document.getElementById('phoneError').style.display = 'none';
-	document.getElementById('contactAddResult').style.display = 'none';
 	document.getElementById("contactAddResult").innerHTML = "";
 }
 
@@ -324,8 +444,15 @@ function displayContacts(){
 					let table = document.getElementById("contactsTableBody");
 					table.innerHTML ="";
 
+					let oldPhone = "";
+					let newPhone = "";
+
 					// Iterates through all of the contacts and puts them into a table
 					allRetrievedConatacts.forEach(contact => {
+
+						oldPhone = contact.Phone;
+
+						newPhone = "(" + oldPhone.slice(0,3) + ")" + oldPhone.slice(3,7) + "-" +oldPhone.slice(7);
 
 						const tableBody = document.getElementById('contactsTableBody');
 						const newRow = document.createElement('tr');
@@ -340,7 +467,7 @@ function displayContacts(){
 						emailColumn.textContent = contact.Email;
 
 						const phoneColumn = document.createElement('td');
-						phoneColumn.textContent = contact.Phone;
+						phoneColumn.textContent = newPhone;
 
 						const actionsColumn = document.createElement('td');
 
@@ -384,12 +511,14 @@ function searchContact() {
 
 		let firstNameRow = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
 		let lastNameRow = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+		let email = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+		let phone = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
 
 		let fullName = `${firstNameRow} ${lastNameRow}`;
 
-		if (fullName.includes(searchText)) {
+		if (fullName.includes(searchText) || email.includes(searchText) || phone.includes(searchText)) {
             rows[i].style.display = '';
-        } 
+        }
 		
 		else {
             rows[i].style.display = 'none';
@@ -456,7 +585,7 @@ function addContact(event) {
     }
 
 	//validate number format
-    var phonePattern = /^(?:\d{10}|\d{3}-\d{3}-\d{4})$/;
+    var phonePattern = /^\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/; 
     if (!phonePattern.test(phone)) {
         document.getElementById('phoneError').innerText = 'Please enter a valid phone number.';
         document.getElementById('phoneError').style.display = 'block';
@@ -466,6 +595,10 @@ function addContact(event) {
     if (!isValid) {
         return;
     }
+
+
+	phone = phone.replace(/[() -]/g, '');
+
 
     // group the data to send it
     var data = {
