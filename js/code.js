@@ -1,4 +1,3 @@
-
 const urlBase = 'http://cop4331summer-test.online/LAMPAPI';
 const extension = 'php';
 
@@ -102,41 +101,60 @@ function checkPassword(){
 
 	let isValid = true;
 
-	if (password.length >= 8) document.getElementById("lengthRequirement").style.color = 'green';
+	if (password.length >= 8){
+		document.getElementById("lengthRequirement").innerHTML = "✓ At least 8 characters";
+		document.getElementById("lengthRequirement").style.color = 'green';
+	} 
 	else{
+		document.getElementById("lengthRequirement").innerHTML = "✗ At least 8 characters";
 		document.getElementById("lengthRequirement").style.color = 'red';
 		isValid = false;
 	}
 
-	if (password !== password.toLowerCase()) document.getElementById("uppercaseRequirement").style.color = 'green';
+	if (password !== password.toLowerCase()) {
+		document.getElementById("uppercaseRequirement").innerHTML = "✓ At least one uppercase letter";
+		document.getElementById("uppercaseRequirement").style.color = 'green';
+	}
 	else{
+		document.getElementById("uppercaseRequirement").innerHTML = "✗ At least one uppercase letter";
 		document.getElementById("uppercaseRequirement").style.color = 'red';
 		isValid = false;
 	}
 
-	if (password !== password.toUpperCase()) document.getElementById("lowercaseRequirement").style.color = 'green';
+	if (password !== password.toUpperCase()){
+		document.getElementById("lowercaseRequirement").innerHTML = "✓ At least one lowercase letter";
+		document.getElementById("lowercaseRequirement").style.color = 'green';
+	} 
 	else{
+		document.getElementById("lowercaseRequirement").innerHTML = "✗ At least one lowercase letter";
 		document.getElementById("lowercaseRequirement").style.color = 'red';
 		isValid = false;
 	}
 
 
-	if (/\d/.test(password)) document.getElementById("numberRequirement").style.color = 'green';
+	if (/\d/.test(password)) {
+		document.getElementById("numberRequirement").innerHTML = "✓ At least one number";
+		document.getElementById("numberRequirement").style.color = 'green';
+	}
 	else{
+		document.getElementById("numberRequirement").innerHTML = "✗ At least one number";
 		document.getElementById("numberRequirement").style.color = 'red';
 		isValid = false;
 	}
 
-	if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)) document.getElementById("specialCharRequirement").style.color = 'green';
+	if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)) {
+		document.getElementById("specialCharRequirement").innerHTML = "✓ At least one special character";
+		document.getElementById("specialCharRequirement").style.color = 'green';
+
+	}
 	else{
+		document.getElementById("specialCharRequirement").innerHTML = "✗ At least one special character";
 		document.getElementById("specialCharRequirement").style.color = 'red';
 		isValid = false;
 	}
 
 
 	return isValid;
-
-
 
 }
 
@@ -336,48 +354,44 @@ function doLogout()
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
+	localStorage.removeItem("navTitle");
 }
 
 let displayCount = 0;
 
+
+function displayWelcome() {
+	document.getElementById("welcomeMessage").innerHTML = "";
+	document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
+}
+
 function display(formId) {
 
-	displayCount++;
 
-	document.getElementById('searchText').value = "";
-	document.getElementById('firstName').value = "";
-	document.getElementById('lastName').value = "";
-	document.getElementById('email').value = "";
-	document.getElementById('phone').value = "";
-	document.getElementById('phone').value = "";
-	
-	if (displayCount > 0) {
-		document.getElementById("welcomeMessage").innerHTML = "";
-		document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
-	}
-	
-	
-	
-
-    document.getElementById('addContactDiv').style.display = 'none';
-	document.getElementById('searchDiv').style.display = 'none';
-	document.getElementById('contactsListDiv').style.display = 'none';
-	document.getElementById('editDiv').style.display = 'none';
+	document.getElementById("welcomeMessage").innerHTML = "";
+	document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
+	localStorage.setItem("navTitle", "Logged in as " + firstName + " " + lastName);
+    document.getElementById('container').style.display = 'none';
 
     document.getElementById(formId).style.display = 'block';
 
 
-	if (formId === 'searchDiv')
-		document.getElementById('contactsListDiv').style.display = 'block';
 	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'none';
 
 }
 
+function displayEdit() {
 
-function displaySearchAddButtons() {
-    document.getElementById('addContactDiv').style.display = 'none';
 	document.getElementById('searchDiv').style.display = 'none';
 	document.getElementById('contactsListDiv').style.display = 'none';
+
+    document.getElementById('container').style.display = 'block';
+}
+
+
+function displaySearchAddButtons() {
+	document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
+    document.getElementById('container').style.display = 'none';
 	document.getElementsByClassName('search-add-buttons-container')[0].style.display = 'flex';
 	document.getElementById("firstNameError").innerHTML = "";
 	document.getElementById("lastNameError").innerHTML = "";
@@ -387,7 +401,7 @@ function displaySearchAddButtons() {
     document.getElementById('lastNameError').style.display = 'none';
     document.getElementById('emailError').style.display = 'none';
     document.getElementById('phoneError').style.display = 'none';
-	document.getElementById("contactAddResult").innerHTML = "";
+	document.getElementById("contactAddResult").style.display = 'none';
 }
 
 
@@ -397,6 +411,11 @@ let allRetrievedConatacts = [];
 function displayContacts(){
 
 	let userId = getUserIdFromCookie();
+	document.getElementById("nav__title").innerHTML = "Logged in as " + firstName + " " + lastName;
+	document.getElementById("welcomeMessage").innerHTML = "";
+	document.getElementById('searchDiv').style.display = 'block';
+	document.getElementById('contactsListDiv').style.display = 'block';
+	document.getElementById('container').style.display = 'none';
 	document.getElementById("contactSearchResult").innerHTML = "";
 	document.getElementById("firstNameEditError").innerHTML = "";
 	document.getElementById("lastNameEditError").innerHTML = "";
@@ -406,6 +425,7 @@ function displayContacts(){
     document.getElementById('lastNameEditError').style.display = 'none';
     document.getElementById('emailEditError').style.display = 'none';
     document.getElementById('phoneEditError').style.display = 'none';
+	
 
 
 
@@ -453,7 +473,7 @@ function displayContacts(){
 
 						oldPhone = contact.Phone;
 
-						newPhone = "(" + oldPhone.slice(0,3) + ")" + oldPhone.slice(3,7) + "-" +oldPhone.slice(7);
+						newPhone = "(" + oldPhone.slice(0,3) + ")" + oldPhone.slice(3,6) + "-" +oldPhone.slice(6);
 
 						const tableBody = document.getElementById('contactsTableBody');
 						const newRow = document.createElement('tr');
@@ -473,7 +493,7 @@ function displayContacts(){
 						const actionsColumn = document.createElement('td');
 
 						actionsColumn.innerHTML = `
-                            <button onclick='display("editDiv"); fillOutForm(${contact.ID});'>Edit</button>
+                            <button onclick='displayEdit(); fillOutForm(${contact.ID});'>Edit</button>
                             <button onclick='deleteContact(${contact.ID})'>Delete</button>
                         `;
 
@@ -499,6 +519,16 @@ function displayContacts(){
 	{
 		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
+}
+
+function goToContacts() {
+
+	window.location.href = "Contacts.html";
+
+}
+
+function goToContactManager() {
+	window.location.href = "contactManager.html";
 }
 
 
@@ -529,13 +559,15 @@ function searchContact() {
 }
 
 function clearContactAddResult(){
-	document.getElementById('contactAddResult').innerHTML = "";
 	document.getElementById('firstNameError').style.display = 'none';
     document.getElementById('lastNameError').style.display = 'none';
     document.getElementById('emailError').style.display = 'none';
     document.getElementById('phoneError').style.display = 'none';
-	document.getElementById("editResult").style.display = 'none';
-
+	document.getElementById('contactAddResult').style.display = 'none';
+	document.getElementById('firstNameError').textContent = '';
+	document.getElementById('lastNameError').textContent = '';
+	document.getElementById('emailError').textContent = '';
+	document.getElementById('phoneError').textContent = '';
 }
 
 
@@ -544,10 +576,11 @@ function addContact(event) {
     event.preventDefault();
 
 	//clear all messages
-    document.getElementById('firstNameError').style.display = 'none';
-    document.getElementById('lastNameError').style.display = 'none';
-    document.getElementById('emailError').style.display = 'none';
-    document.getElementById('phoneError').style.display = 'none';
+	document.getElementById('contactAddResult').textContent = '';
+	document.getElementById('firstNameError').textContent = '';
+	document.getElementById('lastNameError').textContent = '';
+	document.getElementById('emailError').textContent = '';
+	document.getElementById('phoneError').textContent = '';
 
 	//read input
 	var firstName = document.getElementById('firstName').value;
@@ -566,13 +599,13 @@ function addContact(event) {
     }
 
     if (!firstName) {
-        document.getElementById('firstNameError').innerText = 'First name is required.';
+        document.getElementById('firstNameError').innerText = '* First name is required.';
         document.getElementById('firstNameError').style.display = 'block';
         isValid = false;
     }
 
     if (!lastName) {
-        document.getElementById('lastNameError').innerText = 'Last name is required.';
+        document.getElementById('lastNameError').innerText = '* Last name is required.';
         document.getElementById('lastNameError').style.display = 'block';
         isValid = false;
     }
@@ -580,7 +613,7 @@ function addContact(event) {
 	//validate email address format
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-        document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+        document.getElementById('emailError').innerText = '* Please enter a valid email address.';
         document.getElementById('emailError').style.display = 'block';
         isValid = false;
     }
@@ -588,12 +621,25 @@ function addContact(event) {
 	//validate number format
     var phonePattern = /^\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/; 
     if (!phonePattern.test(phone)) {
-        document.getElementById('phoneError').innerText = 'Please enter a valid phone number.';
+        document.getElementById('phoneError').innerText = '* Please enter a valid phone number.';
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+    }
+
+	if (!email) {
+        document.getElementById('emailError').innerText = '* Email is required.';
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    }
+
+	if (!phone) {
+        document.getElementById('phoneError').innerText = '* Phone number is required.';
         document.getElementById('phoneError').style.display = 'block';
         isValid = false;
     }
 
     if (!isValid) {
+		console.log("Not valid!");
         return;
     }
 
@@ -611,9 +657,11 @@ function addContact(event) {
     };
 
     // create ajax request
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'LAMPAPI/AddContact.php', true); //path to api endpoint file
-    xhr.setRequestHeader('Content-Type', 'application/json');
+	let url = urlBase + '/AddContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     // process server response
     xhr.onreadystatechange = function () {
@@ -621,10 +669,12 @@ function addContact(event) {
             var response = JSON.parse(xhr.responseText);
             if (response.error === "") {
                 document.getElementById('contactAddResult').innerText = 'Contact added successfully!';
+				document.getElementById('contactAddResult').style.display = 'block';
                 document.getElementById('contactAddResult').style.color = 'green';
-                document.getElementById('addContactForm').reset();
+                document.getElementById('form').reset();
             } else {
                 document.getElementById('contactAddResult').innerText = 'Failed to add contact: ' + response.error;
+				document.getElementById('contactAddResult').style.display = 'block';
                 document.getElementById('contactAddResult').style.color = 'red';
             }
         }
@@ -637,10 +687,15 @@ function fillOutForm (contactId) {
 
 	let contact = allRetrievedConatacts.find(c => c.ID === contactId);
 
+
+	oldPhone = contact.Phone;
+
+	newPhone = "(" + oldPhone.slice(0,3) + ")" + oldPhone.slice(3,6) + "-" +oldPhone.slice(6);
+
 	document.getElementById("firstNameEdit").value = contact.FirstName;
 	document.getElementById("lastNameEdit").value = contact.LastName;
 	document.getElementById("emailEdit").value = contact.Email;
-	document.getElementById("phoneEdit").value = contact.Phone;
+	document.getElementById("phoneEdit").value = newPhone;
 
 	
 	document.getElementById('contactIdEdit').value = contact.ID;
@@ -654,10 +709,10 @@ function editContact(event) {
 	event.preventDefault();
 
 	//clear all messages
-    document.getElementById('firstNameEditError').style.display = 'none';
-    document.getElementById('lastNameEditError').style.display = 'none';
-    document.getElementById('emailEditError').style.display = 'none';
-    document.getElementById('phoneEditError').style.display = 'none';
+	document.getElementById('firstNameEditError').textContent = '';
+	document.getElementById('lastNameEditError').textContent = '';
+	document.getElementById('emailEditError').textContent = '';
+	document.getElementById('phoneEditError').textContent = '';
 
 	//read input
 	var contactId = document.getElementById('contactIdEdit').value;
@@ -667,48 +722,58 @@ function editContact(event) {
     var phone = document.getElementById('phoneEdit').value;
     var userId = getUserIdFromCookie(); 
 
-	
-	console.log(contactId);
-	console.log(firstName);
-	console.log(lastName);
-	console.log(email);
-	console.log(phone);
-	console.log(userId);
 
     // validate input
     var isValid = true;
 
     if (!firstName) {
-        document.getElementById('firstNameEditError').innerText = 'First name is required.';
-        document.getElementById('firstNameEditError').style.display = 'block';
+        document.getElementById('firstNameEditError').textContent = '** First name is required.';
+		document.getElementById('firstNameEditError').style.display = 'block';
         isValid = false;
     }
 
     if (!lastName) {
-        document.getElementById('lastNameEditError').innerText = 'Last name is required.';
-        document.getElementById('lastNameEditError').style.display = 'block';
+        document.getElementById('lastNameEditError').textContent = '* Last name is required.';
+		document.getElementById('lastNameEditError').style.display = 'block';
         isValid = false;
     }
+
+	
 
 	//validate email address format
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-        document.getElementById('emailEditError').innerText = 'Please enter a valid email address.';
-        document.getElementById('emailEditError').style.display = 'block';
+        document.getElementById('emailEditError').textContent = '* Please enter a valid email address.';
+		document.getElementById('emailEditError').style.display = 'block';
         isValid = false;
     }
 
 	//validate number format
-    var phonePattern = /^(?:\d{10}|\d{3}-\d{3}-\d{4})$/;
+    var phonePattern = /^\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/;
     if (!phonePattern.test(phone)) {
-        document.getElementById('phoneEditError').innerText = 'Please enter a valid phone number.';
-        document.getElementById('phoneEditError').style.display = 'block';
+        document.getElementById('phoneEditError').innerText = '* Please enter a valid phone number.';
+		document.getElementById('phoneEditError').style.display = 'block';
+        isValid = false;
+    }
+
+	if (!email) {
+        document.getElementById('emailEditError').textContent = '* Email is required.';
+		document.getElementById('emailEditError').style.display = 'block';
+        isValid = false;
+    }
+
+	if (!phone) {
+        document.getElementById('phoneEditError').textContent = '* Phone number is required.';
+		document.getElementById('phoneEditError').style.display = 'block';
         isValid = false;
     }
 
     if (!isValid) {
+		console.log("Not valid!");
         return;
     }
+
+	phone = phone.replace(/[() -]/g, '');
 
     // group the data to send it
     var data = {
@@ -734,11 +799,10 @@ function editContact(event) {
             if (response.error === "") {
                 document.getElementById('editResult').innerText = 'Contact edited successfully!';
                 document.getElementById('editResult').style.color = 'green';
-                document.getElementById('editForm').reset();
+                document.getElementById('form').reset();
 
 				setTimeout(function() {
-                    display("searchDiv");
-                    displayContacts()
+                    goToContacts();
                 }, 1200);
 
 
