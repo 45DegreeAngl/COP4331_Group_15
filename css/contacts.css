@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/Blurry_COP4331_Homepage_Background_Blurred_Version.png"); 
+    background-image: url("../images/COP4331_Homepage_Background_Blurred_Version.webp"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -135,30 +135,20 @@ h1 {
     text-align: center;
 }
 
-#editDiv {
-    display: none;
-    background-color: #b0cfec;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px #01284c;
-    width: 80%;
-    max-width: 450px;
-    margin: 20px auto;
-    text-align: center;
-}
 
 #welcomeMessage{
+    visibility: hidden;
     font-size: 2.4rem !important;
 }
 
-
-
-
-
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: block;
+}
 
 
 #searchDiv {
-    display: none;
     background-color: #b0cfec;
     padding: 20px;
     border-radius: 10px;
@@ -167,9 +157,12 @@ h1 {
     max-width: 450px;
     margin: 20px auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#addContactDiv h2, #searchDiv h2, #editDiv h2 {
+#addContactDiv h2, #searchDiv h2 {
     font-family: 'Kalam', cursive;
     color: #10467a;
     margin-bottom: 5px;
@@ -181,13 +174,13 @@ h1 {
     margin-bottom: 15px;
 }
 
-#addContactDiv form, #searchDiv form, #editDiv form {
+#addContactDiv form, #searchDiv form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#addContactDiv label, #searchDiv label, #editDiv label {
+#addContactDiv label, #searchDiv label {
     font-family: 'Kalam', cursive;
     color: #10467a;
     margin-bottom: 5px;
@@ -196,7 +189,7 @@ h1 {
     font-size: 1.3rem;
 }
 
-#addContactDiv input, #searchDiv input, #editDiv input {
+#addContactDiv input, #searchDiv input {
     border-radius: 10px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -223,21 +216,6 @@ h1 {
     white-space: nowrap; 
 }
 
-#editDiv button {
-    font-family: 'Kalam', cursive;
-    border: none;
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    color: white;
-    background-color: #10467a;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 5px;
-    width: auto;
-    text-align: center;
-    white-space: nowrap; 
-}
 
 .button-container {
     display: flex;
@@ -246,30 +224,17 @@ h1 {
     margin-top: 10px;
 }
 
-#addContactDiv button:hover, #searchDiv button:hover, #editDiv button:hover {
+#addContactDiv button:hover, #searchDiv button:hover, #backButton {
     background-color: #2b89e0;
 }
 
-#contactAddResult, #editResult {
+/* #contactAddResult, #editResult {
+    display: none;
     margin-top: 20px;
     font-family: 'Kalam', cursive;
     color: #10467a;
-}
+} */
 
-#contactsListDiv {
-    display: none;
-}
-
-.error-message {
-    margin-top: 15px;
-    border: 2px solid #b22222;
-    padding: 10px 40px;
-    background-color: #f8d7da;
-    color: black;
-    font-size: 1.0rem;
-    display: none;
-    font-family: 'kalam';
-}
 
 #contactsListDiv {
     width: 100%;
@@ -387,4 +352,172 @@ h1 {
     max-width: 500px;
     font-size: 1.25rem;
     text-align: center;
+}
+
+
+
+
+
+
+
+.container {
+    display: none;
+    font-size: 1.1rem;
+    font-family: 'Kalam', cursive;
+    color: #10467a;
+    top: 80px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #01284c;
+    background-color: #b0cfec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#container h2 {
+    font-family: 'Kalam', cursive;
+    font-size: 1.5rem;
+    color: #10467a;
+    font-weight: 700;
+    text-align: center;
+    background-color: #b0cfec;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.container .form {
+    display: none;
+    font-size: 1.1rem;
+    font-family: 'Kalam', cursive;
+    font-weight: 500;
+    color: #10467a;
+    margin-top: 0;
+    background-color: #b0cfec;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container label {
+    font-size: 1.2rem;
+    align-items: flex-start !important;
+}
+
+.container .input-box {
+    width: 90%;
+    margin: 10px 0;
+    font-weight: 600;
+    font-family: 'Kalam', cursive;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .label-and-error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.form .input-box input {
+    font-family: 'Kalam', cursive;
+    position: relative;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 25px;
+    margin: 5px 0;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 500px;
+    margin: 10px 0;
+    gap: 70px;
+    
+}
+
+.container button {
+    font-family: 'Kalam', cursive;
+    border: none;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    flex: 1;
+    color: white;
+    background-color: #10467a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.container button:hover {
+    background-color: #2b89e0;
+}
+
+
+#editResult {
+    display: block;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Kalam', cursive;
+    color: #10467a !important;
+}
+
+#contactAddResult {
+    display: block;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Kalam', cursive;
+    color: #10467a !important;
+}
+
+
+.error-message {
+    color: red !important;
+    font-size: 1.0rem !important;
+    display: block !important;
+}
+
+
+.search-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0;
+}
+
+#backButton {
+    font-family: 'Kalam', cursive;
+    border: none;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #10467a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
+    text-align: center;
+    white-space: nowrap;
 }
