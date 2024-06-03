@@ -5,7 +5,7 @@ info:
   version: 1.0.0
   title: Contact Manager
   contact:
-    email: shanewelz@gmail.com
+    email: sh700128@ucf.edu
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -181,10 +181,10 @@ definitions:
     properties:
       login:
         type: string
-        example: fred
+        example: JohhnyS
       password:
         type: string
-        example: secret
+        example: password
   SignUp:
     type: object
     required:
@@ -236,7 +236,7 @@ definitions:
         example: JohnSmith@hotmail.com
       UserID:
         type: integer
-        example: 1
+        example: 4
   Search:
     type: object
     required:
@@ -248,7 +248,7 @@ definitions:
         example: J
       UserID:
         type: integer
-        example: 1
+        example: 4
   Edit:
     type: object
     required:
@@ -264,19 +264,19 @@ definitions:
         example: Bob
       LastNameNew:
         type: string
-        example: Bob
+        example: Jonson
       PhoneNew:
         type: string
         example: (555)123-4567
       EmailNew:
         type: string
-        example: bob@outlook.com
+        example: bobj2@outlook.com
       UserID:
         type: integer
-        example: 1
+        example: 4
       ID:
         type: integer
-        example: 6
+        example: 23
   Delete:
     type: object
     required:
@@ -288,4 +288,4 @@ definitions:
         example: 23
       UserID:
         type: integer
-        example: 1
+        example: 4
