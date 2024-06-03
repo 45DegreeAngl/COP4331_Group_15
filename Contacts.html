@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Contact Manager App</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+
+        <script type="text/javascript" src="js/code.js"></script>
+        <link rel="stylesheet" href="css/contacts.css">
+        <link href="https://fonts.googleapis.com/css?family=Kalam:wght@300;400;700&display=swap;" rel="stylesheet">
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() 
+            {
+                readCookie();
+            }, false);
+        </script>
+    </head>
+
+    <body onload="displayContacts()">   
+             
+        <nav class="navbar">
+            <div class="nav__container">
+                <a href="contactManager.html" class="active">Home</a>
+                <a href="aboutUs.html" >About Us</a>
+                <a href="https://github.com/45DegreeAngl/COP4331_Group_15/tree/main">GitHub</a>
+                <a href="#" onclick="doLogout();">Logout</a>
+            </div>
+            <div class="nav__title" id = "nav__title"></div>
+        </nav>
+
+
+        <div class="main-content">
+            <h1 id="welcomeMessage"></h1>
+            <div id="searchDiv" >
+                <h2>Search Contacts</h2>
+                <input type="text" id="searchText" placeholder="Search for contact" oninput="searchContact()">
+                <div class="search-button-container">
+                    <button type="button" id="backButton" onclick="goToContactManager(); displaySearchAddButtons(); ">Back</button>
+                </div>
+                <div id="contactSearchResult"></div>
+            </div>
+
+            <div id="contactsListDiv">
+                <h2>Contacts List</h2>
+                <table id="contactsTable" >
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="contactsTableBody">
+                        <!-- Contacts will show here -->
+                    </tbody>
+                </table>
+                
+            </div>
+        
+
+
+            <section class="container" id="container" style="display: none;" >
+                <h2>Editing Contact</h2>
+                <form action="#" class="form" id= "form" onsubmit="editContact(event);">
+                    <input type="hidden" id="contactIdEdit" name="contactIdEdit"> 
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="firstNameEdit"> First Name:</label>
+                            <span class="error-message" id="firstNameEditError"></span>
+                        </div>
+                        <input type="text" id="firstNameEdit" placeholder="Enter first name">
+                    </div>
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="lastNameEdit"> Last Name:</label>
+                            <span class="error-message" id="lastNameEditError"></span>
+                        </div>
+                        <input type="text" id="lastNameEdit" placeholder="Enter last name">
+                    </div>
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="emailEdit"> Email:</label>
+                            <span class="error-message" id="emailEditError"></span>
+                        </div>
+                        <input type="text" id="emailEdit" placeholder="example@example.com">
+                    </div>
+
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="phoneEdit"> Phone number:</label>
+                            <span class="error-message" id="phoneEditError"></span>
+                        </div>
+                        <input type="text" id="phoneEdit" placeholder="xxx-xxx-xxxx">
+                    </div>
+            
+                    <div class="button-container">
+                        <button type="button" onclick="displayContacts();">Back</button>
+                        <button type="submit">Save Changes</button>
+                    </div>
+
+                    <div id="editResult"></div>
+                </form>
+            </section>
+        </div>
+    </body>
+</html>
