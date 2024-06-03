@@ -15,6 +15,15 @@
             document.addEventListener('DOMContentLoaded', function() 
             {
                 readCookie();
+                if (localStorage.getItem("navTitle")) {
+                    document.getElementById("nav__title").innerHTML = localStorage.getItem("navTitle");
+                    document.getElementById("welcomeMessage").innerHTML = "";
+                }
+
+                else{
+                    document.getElementById('welcomeMessage').style.visibility = 'visible';
+                    document.getElementById("welcomeMessage").style.display = 'block';
+                }
             }, false);
         </script>
     </head>
@@ -34,102 +43,55 @@
         <div class="main-content">
             <h1 id="welcomeMessage">Signed in as (firstname lastname)</h1>
             <div class="search-add-buttons-container">
-                <button type="button" class="search-add-buttons" class="buttons" onclick="display('searchDiv'); displayContacts();"> Search Contacts <i class="fas fa-search"></i> </button><br />
-                <button type="button" class="search-add-buttons" class="buttons" onclick="display('addContactDiv')"> Add Contacts <i class="fas fa-plus"></i> </button><br />
+                <button type="button" class="search-add-buttons" class="buttons" onclick="goToContacts()"> Search Contacts <i class="fas fa-search"></i> </button><br />
+                <button type="button" class="search-add-buttons" class="buttons" onclick="display('container')"> Add Contacts <i class="fas fa-plus"></i> </button><br />
             </div>
 
             
-            <div id="addContactDiv">
+            <section class="container" id="container" style="display: none;" >
                 <h2>Add a New Contact</h2>
-                <form id="addContactForm" onsubmit="addContact(event);">                    
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="first name" onfocus="clearContactAddResult()"   required>
-                    <span id="firstNameError" class="error-message"></span><br>
-            
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="last name" onfocus="clearContactAddResult()" required>
-                    <span id="lastNameError" class="error-message"></span><br>
-            
-                    <label for="email">Email:</label>                    
-                    <input type="email" id="email" name="email" placeholder="example@example.com" onfocus="clearContactAddResult()" required>
-                    <span id="emailError" class="error-message"></span><br>
-            
-                    <label for="phone">Phone:</label>
-                    <input type="text" id="phone" name="phone" placeholder="xxx-xxx-xxxx" onfocus="clearContactAddResult()" required>
-                    <span id="phoneError" class="error-message"></span><br>
+                <form action="#" class="form" id= "form" onsubmit="addContact(event);">   
+                    
+                    
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="firstName"> First Name:</label>
+                            <span class="error-message" id="firstNameError"></span>
+                        </div>
+                        <input type="text" id="firstName" placeholder="Enter first name" onfocus="clearContactAddResult()">
+                    </div>
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="lastName">Last Name:</label>
+                            <span class="error-message" id="lastNameError"></span>
+                        </div>
+                        <input type="text" id="lastName" placeholder="Enter last name" onfocus="clearContactAddResult()">
+                    </div>
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="email">Email:</label>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                        <input type="text" id="email" placeholder="example@example.com" onfocus="clearContactAddResult()">
+                    </div>
+
+                    <div class="input-box">
+                        <div class="label-and-error">
+                            <label for="phone">Phone number:</label>
+                            <span class="error-message" id="phoneError"></span>
+                        </div>
+                        <input type="text" id="phone" placeholder="xxx-xxx-xxxx" onfocus="clearContactAddResult()">
+                    </div>
             
                     <div class="button-container">
                         <button type="button" onclick="displaySearchAddButtons()">Back</button>
                         <button type="submit">Add</button>
                     </div>
+                    <div id="contactAddResult"></div>
                 </form>
-                <div id="contactAddResult"></div>
-
-                <p id="contactList">
-                </p><br /><br />
-            </div>
-            
-
-
-            <div id="searchDiv" >
-                <h2>Search Contacts</h2>
-                <input type="text" id="searchText" placeholder="Search by first name and last name" oninput="searchContact()">
-                <div class="button-container">
-                    <button type="button" onclick="displaySearchAddButtons()">Back</button>
-                </div>
-                <div id="contactSearchResult"></div>
-            </div>
-
-            <div id="contactsListDiv">
-                <h2>Contacts List</h2>
-                <table id="contactsTable" >
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Actions</th> 
-                        </tr>
-                    </thead>
-                    <tbody id="contactsTableBody">
-                        <!-- Contacts will show here -->
-                    </tbody>
-                </table>
-                
-            </div>
-
-
-
-            <div id="editDiv">
-                <h2>Editing Contact</h2>
-                <form id="editForm" onsubmit="editContact(event);">
-                    <input type="hidden" id="contactIdEdit" name="contactIdEdit">   
-                                     
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstNameEdit" name="firstNameEdit" placeholder="first name" required>
-                    <span id="firstNameEditError" class="error-message"></span><br>
-            
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastNameEdit" name="lastNameEdit" placeholder="last name" required>
-                    <span id="lastNameEditError" class="error-message"></span><br>
-            
-                    <label for="email">Email:</label>                    
-                    <input type="email" id="emailEdit" name="emailEdit" placeholder="example@example.com" required>
-                    <span id="emailEditError" class="error-message"></span><br>
-            
-                    <label for="phone">Phone:</label>
-                    <input type="text" id="phoneEdit" name="phoneEdit" placeholder="xxx-xxx-xxxx" required>
-                    <span id="phoneEditError" class="error-message"></span><br>
-            
-                    <div class="edit-button-container">
-                        <button type="button" onclick="display('searchDiv'); displayContacts();">Back</button>
-                        <button type="submit">Save Changes</button>
-                    </div>
-                </form>
-                <div id="editResult"></div>
-
-            </div>
+            </section>
         </div>
     </body>
 </html>
