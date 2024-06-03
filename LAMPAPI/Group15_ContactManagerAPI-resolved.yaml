@@ -184,7 +184,7 @@ definitions:
         example: JohhnyS
       password:
         type: string
-        example: password
+        example: Password1!
   SignUp:
     type: object
     required:
@@ -204,7 +204,7 @@ definitions:
         example: JohnnyS
       Password:
         type: string
-        example: password
+        example: Password1!
   ValidateSignUp:
     type: object
     required:
@@ -212,7 +212,7 @@ definitions:
     properties:
       Login:
         type: string
-        example: JohnnyS
+        example: JohhnyS
   Contact:
     type: object
     required:
@@ -224,7 +224,7 @@ definitions:
     properties:
       FirstName:
         type: string
-        example: John
+        example: Bob
       LastName:
         type: string
         example: Smith
@@ -233,7 +233,7 @@ definitions:
         example: (555)555-5555
       Email:
         type: string
-        example: JohnSmith@hotmail.com
+        example: BobSmith@hotmail.com
       UserID:
         type: integer
         example: 4
