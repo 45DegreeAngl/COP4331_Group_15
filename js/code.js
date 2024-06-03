@@ -508,7 +508,8 @@ function displayContacts(){
 				}
 
 				else {
-					//document.getElementById("contactSearchResult").innerText = "No contacts found.";
+					let table = document.getElementById("contactsTableBody");
+    				table.innerHTML = "";
 				}
 			}
 		};
@@ -638,8 +639,10 @@ function addContact(event) {
         isValid = false;
     }
 
+
+	
+
     if (!isValid) {
-		console.log("Not valid!");
         return;
     }
 
@@ -769,7 +772,6 @@ function editContact(event) {
     }
 
     if (!isValid) {
-		console.log("Not valid!");
         return;
     }
 
@@ -834,7 +836,6 @@ function deleteContact(contactId) {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-            console.log(xhr.responseText);
             if (xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
                 if (response.error === "") {
